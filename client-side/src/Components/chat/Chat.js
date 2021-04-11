@@ -76,6 +76,7 @@ const Chat = ({ location }) => {
 	}, [ENDPOINT, location.search]);
 
 	useEffect(() => {
+		//all messages
 		socket.on('message', ({ name, sendMessage, id }) => {
 			console.log(name)
 			messages[id] = {name, message: sendMessage};
