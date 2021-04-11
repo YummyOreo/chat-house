@@ -1,12 +1,12 @@
 <h1 align="center">About This Chat App</h1>
-<p align="center"><a href="https://github.com/OreoDivision/unnamed-chat-app#about">About</a> ⦿ <a href="https://github.com/OreoDivision/unnamed-chat-app#how-to-contribute">How to contribute</a></p>
+<p align="center"><a href="https://github.com/OreoDivision/unnamed-chat-app#about">About</a> ⦿ <a href="https://github.com/OreoDivision/unnamed-chat-app#how-to-contribute">How to contribute</a> ⦿ <a href="https://github.com/OreoDivision/unnamed-chat-app#how-to-run">How to run</a></p>
 
 ## Structure
 
 | Codebase             |      Description      |
 | :------------------- | :-------------------: |
-| [client](client-side)       |      The code for the client side       |
-| [server](server)       |      The server       |
+| [client](client-side)       |      The sorce code for the client side       |
+| [server](server)       |      The sorce code for the server       |
 
 ## About
 
@@ -47,3 +47,30 @@ Open a pr with a description
 
 ## How to run
 
+There are 2 things to run, with the same command.
+
+### First download the files
+
+```console
+$ git clone https://github.com/OreoDivision/unnamed-chat-app
+$ cd unnamed-chat-app
+```
+This will download the sorce for the chat app
+
+### Install Node JS
+To make the server and client work you need nodejs
+Go [here https://nodejs.org/en/](https://nodejs.org/en/)
+
+### Install all npm packages
+In [server](server) and [client-side](client-side) type the following in the console:
+```console
+$ npm i
+```
+
+### Run the app:
+
+To run the app you need **2** consoles open in [server](server) and [client-side](client-side), then type:
+```console
+$ npm start
+```
+In each!
