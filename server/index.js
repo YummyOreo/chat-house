@@ -31,14 +31,17 @@ io.on('connection', (socket) => {
 		rooms = addUser({ userID: socket.id, userName: name, roomID: room, rooms })
 
 		console.log(rooms[room].name)
-		callback({ roomname: rooms[room].name });
 
 		console.log(rooms)
 
 		socket.join(rooms[room])
 
-		socket.to(rooms[room]).emit('system', { message: `${name} has joined`})
-		socket.emit('system', { message: `${name} has joined`})
+		let id = checkMessageId(room);
+
+		rooms[room].messages.push(id);
+		socket.emit('message', { name: 'system', sendMessage: `${name} has joined!`, id })
+		socket.to(rooms[room]).emit('message', { name: 'system', sendMessage: `${name} has joined!`, id })
+		callback({ roomname: rooms[room].name });
 	})
 
 	socket.on('send message', ( name, room, message, callback ) => {
@@ -63,7 +66,15 @@ io.on('connection', (socket) => {
 		room = getUsersRooms(socket, rooms);
 		console.log(room)
 		if (room == undefined) return
+
+		let id = checkMessageId(room);
+
+		rooms[room].messages.push(id);
+		socket.to(rooms[room]).emit('message', { name: 'system', sendMessage: `${rooms[room].users[socket.id]} has left.`, id })
+
 		rooms = removeUser({ userID: socket.id, userName: rooms[room].users[socket.id], roomID: room, rooms })
+
+
 	});
 
 });

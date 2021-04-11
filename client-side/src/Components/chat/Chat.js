@@ -36,7 +36,7 @@ const Chat = ({ location }) => {
 	let [name, setName] = useState('');
 	let [room, setRoom] = useState('');
 
-	let [messages, setMessages] = useState({ 1: {name: "hello", message: "HEY"}});
+	let [messages, setMessages] = useState({ 1: {name: "System", message: "This is the start of the chat"}});
 	let [message, setMessage] = useState([]);
 
 	let [systems] = useState([]);
@@ -81,9 +81,6 @@ const Chat = ({ location }) => {
 			messages[id] = {name, message: sendMessage};
 			console.log(messages);
 		});
-		socket.on('system', ({ message }) => {
-			//setSystems([...systems, message]);
-		});
 	}, [messages]);
 
 	const sendMessage = (event) => {
@@ -92,8 +89,6 @@ const Chat = ({ location }) => {
 		if(message) {
 			socket.emit('send message', name, room, message, () => setMessage(''));
 		}
-		this.message.value = "";
-
 
 	}
 
