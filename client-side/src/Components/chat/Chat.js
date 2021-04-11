@@ -78,9 +78,11 @@ const Chat = ({ location }) => {
 	useEffect(() => {
 		//all messages
 		socket.on('message', ({ name, sendMessage, id }) => {
-			console.log(name)
-			messages[id] = {name, message: sendMessage};
-			console.log(messages);
+			//console.log(name)
+			//messages[id] = {name, message: sendMessage};
+			let idValue = id
+			setMessages({...messages, [idValue]: {name, message: sendMessage}})
+			console.log(messages)
 		});
 	}, [messages]);
 
@@ -102,7 +104,7 @@ const Chat = ({ location }) => {
 				<br/>
 				<div>
 				</div>
-			<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '#292929', height: 'max', minHeight: "96vh"}}>
+			<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '#292929', height: 'max', minHeight: "95vh"}}>
 				<div className='container' style={{marginTop: 0}}>
 				<div>
 					<br/>
@@ -116,7 +118,7 @@ const Chat = ({ location }) => {
 				</div>
 
 				</div>
-				<div style={{backgroundColor: "gray", width: 'max', height: 'max', minHeight: "96vh", color: "white"}}>
+				<div style={{backgroundColor: "gray", width: 'max', height: 'max', minHeight: "95vh", color: "white"}}>
 				<p>Test</p>
 				</div>
 			</div>

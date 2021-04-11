@@ -39,8 +39,8 @@ io.on('connection', (socket) => {
 		let id = checkMessageId(room);
 
 		rooms[room].messages.push(id);
-		socket.emit('message', { name: 'system', sendMessage: `${name} has joined the room!`, id })
-		socket.to(rooms[room]).emit('message', { name: 'system', sendMessage: `${name} has joined the room!`, id })
+		socket.emit('message', { name: 'System', sendMessage: `${name} has joined the room!`, id })
+		socket.to(rooms[room]).emit('message', { name: 'System', sendMessage: `${name} has joined the room!`, id })
 		callback({ roomname: rooms[room].name });
 	})
 
@@ -70,7 +70,7 @@ io.on('connection', (socket) => {
 		let id = checkMessageId(room);
 
 		rooms[room].messages.push(id);
-		socket.to(rooms[room]).emit('message', { name: 'system', sendMessage: `${rooms[room].users[socket.id]} has left.`, id })
+		socket.to(rooms[room]).emit('message', { name: 'System', sendMessage: `${rooms[room].users[socket.id]} has left.`, id })
 
 		rooms = removeUser({ userID: socket.id, userName: rooms[room].users[socket.id], roomID: room, rooms })
 
