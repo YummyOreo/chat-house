@@ -1,6 +1,8 @@
 <h1 align="center">About This Chat App</h1>
 <p align="center"><a href="https://github.com/OreoDivision/unnamed-chat-app#about">About</a> ⦿ <a href="https://github.com/OreoDivision/unnamed-chat-app#how-to-contribute">How to contribute</a> ⦿ <a href="https://github.com/OreoDivision/unnamed-chat-app#how-to-run">How to run</a></p>
 
+# ⚠️ We are switching to TS soon ⚠️
+
 ## Structure
 
 | Codebase             |      Description      |
