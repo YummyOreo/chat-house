@@ -29,7 +29,7 @@ This chat app, is a app for creators. You can make different types of rooms for 
 Or
 * Find something to add to
 
-#### Aslo make shoure what you want to work on is not in [Working On](Working On)
+#### Aslo make shoure what you want to work on is not in [Working On](https://github.com/OreoDivision/unnamed-chat-app/blob/master/Working%20On.md)
 
 ### Then contact **OreoDivision** on discord @ OreoDivision#0001
 
