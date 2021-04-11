@@ -1,5 +1,13 @@
 <h1 align="center">About This Chat App</h1>
-<p align="center"><a href="https://github.com/OreoDivision/unnamed-chat-app#about">About</a></p>
+<p align="center"><a href="https://github.com/OreoDivision/unnamed-chat-app#about">About</a> ⦿ <a href="https://github.com/OreoDivision/unnamed-chat-app#how-to-contribute">How to contribute</a></p>
+
+## Structure
+
+| Codebase             |      Description      |
+| :------------------- | :-------------------: |
+| [client](client-side)       |      The code for the client side       |
+| :------------------- | :-------------------: |
+| [server](server)       |      The server       |
 
 ## About
 
@@ -27,7 +35,7 @@ Go to discord and dm me something like this:
 ```
 **I want to help with your chat app**
 I want to <add/fix>
-<Describe wat you want to add>
+<Describe what you want to add>
 ```
 
 ### Fork and make what you want:
@@ -35,3 +43,8 @@ I want to <add/fix>
 Make shoure you add comments and only change what you need to
 
 ### Make A PR and your done! 
+
+Open a pr with a description
+
+## How to run
+
