@@ -6,7 +6,6 @@
 | Codebase             |      Description      |
 | :------------------- | :-------------------: |
 | [client](client-side)       |      The code for the client side       |
-| :------------------- | :-------------------: |
 | [server](server)       |      The server       |
 
 ## About
