@@ -39,8 +39,8 @@ io.on('connection', (socket) => {
 		let id = checkMessageId(room);
 
 		rooms[room].messages.push(id);
-		socket.emit('message', { name: 'system', sendMessage: `${name} has joined!`, id })
-		socket.to(rooms[room]).emit('message', { name: 'system', sendMessage: `${name} has joined!`, id })
+		socket.emit('message', { name: 'system', sendMessage: `${name} has joined the room!`, id })
+		socket.to(rooms[room]).emit('message', { name: 'system', sendMessage: `${name} has joined the room!`, id })
 		callback({ roomname: rooms[room].name });
 	})
 
