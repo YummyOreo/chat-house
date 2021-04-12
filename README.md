@@ -26,7 +26,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
 
 ### Here is a list of things to do **before** helping:
 
-* Look at [issuse](https://github.com/OreoDivision/chat-house/issues) to find a issue that you want to work n
+* Look at [issuse](https://github.com/OreoDivision/chat-house/issues) to find a issue that you want to work on
 Or
 * Find something to add to
 
