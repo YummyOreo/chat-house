@@ -1,6 +1,6 @@
 <div align="center"><img src="https://static.thenounproject.com/png/2206184-200.png"></div>
-<h1 align="center">About This Chat App</h1>
-<p align="center"><a href="https://github.com/OreoDivision/unnamed-chat-app#about">About</a> ⦿ <a href="https://github.com/OreoDivision/unnamed-chat-app#how-to-contribute">How to contribute</a> ⦿ <a href="https://github.com/OreoDivision/unnamed-chat-app#how-to-run">How to run</a></p>
+<h1 align="center">About Chat House</h1>
+<p align="center"><a href="https://github.com/OreoDivision/chat-house#about">About</a> ⦿ <a href="https://github.com/OreoDivision/chat-house#how-to-contribute">How to contribute</a> ⦿ <a href="https://github.com/OreoDivision/chat-house#how-to-run">How to run</a></p>
 
 # ⚠️ We are switching to TS soon ⚠️
 
@@ -13,7 +13,7 @@
 
 ## About
 
-This chat app, is a app for creators. You can make different types of rooms for different purposes!
+Chat House, is a app for creators. You can make different types of rooms for different purposes!
 
 ## Notable features:
 - [ ] No Login
@@ -26,11 +26,11 @@ This chat app, is a app for creators. You can make different types of rooms for 
 
 ### Here is a list of things to do **before** helping:
 
-* Look at [issuse](https://github.com/OreoDivision/unnamed-chat-app/issues) to find a issue that you want to work n
+* Look at [issuse](https://github.com/OreoDivision/chat-house/issues) to find a issue that you want to work n
 Or
 * Find something to add to
 
-#### Aslo make shoure what you want to work on is not in [Working On](https://github.com/OreoDivision/unnamed-chat-app/blob/master/Working%20On.md)
+#### Aslo make shoure what you want to work on is not in [Working On](https://github.com/OreoDivision/chat-house/blob/master/Working%20On.md)
 
 ### Then contact **OreoDivision** on discord @ OreoDivision#0001
 
@@ -57,8 +57,8 @@ There are 2 things to run, with the same command.
 ### First download the files
 
 ```console
-$ git clone https://github.com/OreoDivision/unnamed-chat-app
-$ cd unnamed-chat-app
+$ git clone https://github.com/OreoDivision/chat-house
+$ cd chat-house
 ```
 This will download the sorce for the chat app
 
