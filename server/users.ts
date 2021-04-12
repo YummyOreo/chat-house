@@ -23,7 +23,7 @@ const removeUser = ({ userID, userName, roomID, rooms }) => {
 }
 
 const makeRoom = ({ roomID, RoomName, userName, owner, userID, rooms }) => {
-	rooms[id] = { name: { RoomName }, users: { userID: userName }, names: { userName: userID }, owner: owner, messages: [1] };
+	rooms[roomID] = { name: { RoomName }, users: { userID: userName }, names: { userName: userID }, owner: owner, messages: [1] };
 	return rooms;
 }
 

@@ -2,7 +2,7 @@
 <h1 align="center">About Chat House</h1>
 <p align="center"><a href="https://github.com/OreoDivision/chat-house#about">About</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-contribute">How to contribute</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-run">How to run</a></p>
 
-# ⚠️ We are switching to TS soon ⚠️
+# ⚠️ We are switching to TS ⚠️
 
 ## Structure
 
@@ -67,9 +67,15 @@ To make the server and client work you need nodejs
 Go [here https://nodejs.org/en/](https://nodejs.org/en/)
 
 ### Install all npm packages
-In [server](server) and [client-side](client-side) type the following in the console:
+In both [server](server) and [client-side](client-side) type the following in the console:
 ```console
 $ npm i
+```
+
+### Convert TS to JS
+In both [server](server) and [client-side](client-side) type the following in the console:
+```console
+$ tsc
 ```
 
 ### Run the app:

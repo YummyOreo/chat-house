@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('disconnect', () => {
-		room = getUsersRooms(socket, rooms);
+		let room = getUsersRooms(socket, rooms);
 		console.log(room)
 		if (room == undefined) return
 
@@ -81,6 +81,7 @@ io.on('connection', (socket) => {
 
 
 function getUsersRooms(socket, rooms) {
+	let room;
 	for (room in rooms){
 		if(rooms[room].users[socket.id] != null) return room;
 	}
