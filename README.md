@@ -67,9 +67,15 @@ To make the server and client work you need nodejs
 Go [here https://nodejs.org/en/](https://nodejs.org/en/)
 
 ### Install all npm packages
-In [server](server) and [client-side](client-side) type the following in the console:
+In both [server](server) and [client-side](client-side) type the following in the console:
 ```console
 $ npm i
+```
+
+### Convert TS to JS
+In both [server](server) and [client-side](client-side) type the following in the console:
+```console
+$ tsc
 ```
 
 ### Run the app:
