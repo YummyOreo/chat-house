@@ -2,14 +2,12 @@
 <h1 align="center">About Chat House</h1>
 <p align="center"><a href="https://github.com/OreoDivision/chat-house#about">About</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-contribute">How to contribute</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-run">How to run</a></p>
 
-# ⚠️ We are switching to TS ⚠️
-
 ## Structure
 
 | Codebase             |      Description      |
 | :------------------- | :-------------------: |
-| [client](client-side)       |      The sorce code for the client side       |
-| [server](server)       |      The sorce code for the server       |
+| [client](client-side)       |      The sorce code for the client side (In Js/React)       |
+| [server](server)       |      The sorce code for the server (In TS)       |
 
 ## About
 
@@ -73,7 +71,7 @@ $ npm i
 ```
 
 ### Convert TS to JS
-In both [server](server) and [client-side](client-side) type the following in the console:
+In [server](server) type the following in the console:
 ```console
 $ tsc
 ```
