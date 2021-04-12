@@ -1,0 +1,3 @@
+# Removes .js files
+**.js
+*.js
