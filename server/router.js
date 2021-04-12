@@ -1,8 +1,6 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
-
 router.get('/', (req, res) => {
-	res.send("Server is runing");
+    res.send("Server is runing");
 });
-
 module.exports = router;
