@@ -71,7 +71,11 @@ $ npm i
 ```
 
 ### Convert TS to JS
-In [server](server) type the following in the console:
+In both [server](server) and [client-side](client-side) type the following in the console:
+
+##### Note:
+* You may need to remove `"noEmit": true` from `tsconfig.json` in the [client-side](client-side)
+
 ```console
 $ tsc
 ```

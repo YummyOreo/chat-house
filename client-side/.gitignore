@@ -1,0 +1,6 @@
+# Removes .js files
+**.js
+*.js
+
+# Removes React-App-env
+react-app-env.d.ts
