@@ -6,7 +6,7 @@
 
 | Codebase             |      Description      |
 | :------------------- | :-------------------: |
-| [client](client-side)       |      The sorce code for the client side (In Js/React)       |
+| [client](client-side)       |      The sorce code for the client side (In Ts/React)       |
 | [server](server)       |      The sorce code for the server (In TS)       |
 
 ## About
