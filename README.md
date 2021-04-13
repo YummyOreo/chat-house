@@ -6,8 +6,8 @@
 
 | Codebase             |      Description      |
 | :------------------- | :-------------------: |
-| [client](client-side)       |      The sorce code for the client side (In Ts/React)       |
-| [server](server)       |      The sorce code for the server (In TS)       |
+| [breakfast](breakfast)       |      The sorce code for the client side (In Ts/React)       |
+| [lunch](lunch)       |      The sorce code for the server (In TS)       |
 
 ## About
 
@@ -65,16 +65,16 @@ To make the server and client work you need nodejs
 Go [here https://nodejs.org/en/](https://nodejs.org/en/)
 
 ### Install all npm packages
-In both [server](server) and [client-side](client-side) type the following in the console:
+In both [lunch](lunch) and [breakfast](breakfast) type the following in the console:
 ```console
 $ npm i
 ```
 
 ### Convert TS to JS
-In both [server](server) and [client-side](client-side) type the following in the console:
+In both [lunch](lunch) and [breakfast](breakfast) type the following in the console:
 
 ##### Note:
-* You may need to remove `"noEmit": true` from `tsconfig.json` in the [client-side](client-side)
+* You may need to remove `"noEmit": true` from `tsconfig.json` in the [breakfast](breakfast)
 
 ```console
 $ tsc
@@ -82,7 +82,7 @@ $ tsc
 
 ### Run the app:
 
-To run the app you need **2** consoles open in [server](server) and [client-side](client-side), then type:
+To run the app you need **2** consoles open in [lunch](lunch) and [breakfast](breakfast), then type:
 ```console
 $ npm start
 ```
