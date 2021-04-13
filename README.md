@@ -8,6 +8,8 @@
 | :------------------- | :-------------------: |
 | [breakfast](breakfast)       |      The sorce code for the client side (In Ts/React)       |
 | [lunch](lunch)       |      The sorce code for the server (In TS)       |
+| [Dinner]()       |      Coming Soon       |
+| [Brunch]()       |      Coming Soon       |
 
 ## About
 
@@ -87,3 +89,7 @@ To run the app you need **2** consoles open in [lunch](lunch) and [breakfast](br
 $ npm start
 ```
 In each!
+
+
+## Why are they called lunch and breakfast
+IDK WHY YOU ASK
