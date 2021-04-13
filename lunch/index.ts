@@ -41,7 +41,15 @@ io.on('connection', (socket) => {
 		rooms[room].messages.push(id);
 		socket.emit('message', { name: 'System', sendMessage: `${name} has joined the room!`, id })
 		socket.to(rooms[room]).emit('message', { name: 'System', sendMessage: `${name} has joined the room!`, id })
-		callback({ roomname: rooms[room].name });
+		let user: any;
+		let userList: any = [];
+		for (user in rooms[room].users){
+			console.log(rooms[room].users)
+			console.log(user)
+			userList.push(rooms[room].users[user])
+		}
+		console.log(userList)
+		callback({ roomname: rooms[room].name, userList });
 	})
 
 	socket.on('send message', ( name, room, message, callback ) => {

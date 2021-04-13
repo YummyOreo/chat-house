@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 import NavBar from './NavBar.js'
 import Input from './input.js'
 import Messages from './Messages.js'
+import UserBar from './userBar.js'
 
 import "../main.css";
 
@@ -36,6 +37,8 @@ const Chat = ({ location }: {location:any}) => {
 	let [name, setName] = useState('');
 	let [room, setRoom] = useState('');
 
+	let [users, setUsers] = useState([]);
+
 	let [messages, setMessages] = useState({ 1: {name: "System", message: "This is the start of the chat"}});
 	let [message, setMessage] = useState([]);
 
@@ -59,8 +62,10 @@ const Chat = ({ location }: {location:any}) => {
 
 			setRoom(room);
 
-			socket.emit('join', { name: promptName, room }, ({ roomname }: {roomname:any}) => {
+			socket.emit('join', { name: promptName, room }, ({ roomname, userList }: {roomname:any, userList: any}) => {
 				setRoomName(roomname);
+				setUsers(userList)
+				console.log(users)
 			});
 			console.log(roomName)
 
@@ -119,7 +124,7 @@ const Chat = ({ location }: {location:any}) => {
 
 				</div>
 				<div style={{backgroundColor: "gray", width: 'max', height: 'max', minHeight: "95vh", color: "white"}}>
-				<p>Test</p>
+					<UserBar users={users}/>
 				</div>
 			</div>
 			
