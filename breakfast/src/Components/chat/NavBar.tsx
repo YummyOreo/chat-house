@@ -20,6 +20,7 @@ const NavBar = ({roomName}: any) => {
 			<nav style={stickyInner}>
 				<div className='nav-wrapper'>
 					<a href="/" className="waves-effect waves-light btn">Back</a>
+					<a id="change name" className="waves-effect waves-light btn">Change Name</a>
 					<a className="brand-logo center">{roomName}</a>
 				</div>
 			</nav>
