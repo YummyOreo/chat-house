@@ -4,6 +4,7 @@ const http = require('http');
 //const cors = require('cors')
 
 const { addUser, removeUser, makeRoom } = require('./users')
+const { updateUserList } = require('./utils')
 let rooms = {  'test': {name: "test", users: {}, names: {}, owner: 'owner', messages: [1]} };
 
 const PORT = process.env.PORT || 5000;
@@ -36,6 +37,8 @@ io.on('connection', (socket) => {
 
 		socket.join(rooms[room])
 
+		updateUserList({socket, rooms, room});
+
 		let id = checkMessageId(room);
 
 		rooms[room].messages.push(id);
@@ -49,7 +52,7 @@ io.on('connection', (socket) => {
 			userList.push(rooms[room].users[user])
 		}
 		console.log(userList)
-		callback({ roomname: rooms[room].name, userList });
+		callback({ roomname: rooms[room].name });
 	})
 
 	socket.on('send message', ( name, room, message, callback ) => {
@@ -81,7 +84,7 @@ io.on('connection', (socket) => {
 		socket.to(rooms[room]).emit('message', { name: 'System', sendMessage: `${rooms[room].users[socket.id]} has left.`, id })
 
 		rooms = removeUser({ userID: socket.id, userName: rooms[room].users[socket.id], roomID: room, rooms })
-
+		updateUserList({socket, rooms, room});
 
 	});
 

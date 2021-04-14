@@ -62,9 +62,8 @@ const Chat = ({ location }: {location:any}) => {
 
 			setRoom(room);
 
-			socket.emit('join', { name: promptName, room }, ({ roomname, userList }: {roomname:any, userList: any}) => {
+			socket.emit('join', { name: promptName, room }, ({ roomname }: {roomname:any}) => {
 				setRoomName(roomname);
-				setUsers(userList)
 				console.log(users)
 			});
 			console.log(roomName)
@@ -90,6 +89,12 @@ const Chat = ({ location }: {location:any}) => {
 			console.log(messages)
 		});
 	}, [messages]);
+
+	useEffect(() => {
+		socket.on("user list", (userList: any) => {
+			setUsers(userList)
+		})
+	}, [users])
 
 	const sendMessage = (event: any) => {
 		event.preventDefault();
