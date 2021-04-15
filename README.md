@@ -2,6 +2,8 @@
 <h1 align="center">About Chat House</h1>
 <p align="center"><a href="https://github.com/OreoDivision/chat-house#about">About</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-contribute">How to contribute</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-run">How to run</a> · <a href="https://trello.com/b/CCdaLcA9">Trello</a> · <a href="https://github.com/OreoDivision/chat-house/blob/master/FAQ.md">FAQ</a></p>
 
+---
+
 ## Structure
 
 | Codebase             |      Description      |
