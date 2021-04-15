@@ -105,10 +105,17 @@ const Chat = ({ location }: {location:any}) => {
 
 	}
 
+	const changeName = (socket: any, setName: any, room: any) => {
+		console.log(socket)
+		const tryName: any = promptNameFunc(socket, room)
+		setName(tryName)
+		socket.emit('name change', tryName, room);
+	}
+
 	return (
 		<div>
 		<div style={{"zIndex": 10}}>
-			<NavBar roomName={roomName} />
+			<NavBar roomName={roomName} changeName={changeName} socket={socket} name={setName} room={room} />
 		</div>	
 				<br/>
 				<br/>

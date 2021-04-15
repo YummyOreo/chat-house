@@ -73,6 +73,14 @@ io.on('connection', (socket) => {
 		}
 	})
 
+	socket.on('name change', (newName, room) => {
+		const oldName = rooms[room].users[socket.id]
+		rooms[room].users[socket.id] = newName;
+		delete rooms[room].name[oldName]
+		rooms[room].name[newName] = socket.id
+		updateUserList({socket, rooms, room})
+	})
+
 	socket.on('disconnect', () => {
 		let room = getUsersRooms(socket, rooms);
 		console.log(room)
