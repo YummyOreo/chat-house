@@ -1,6 +1,6 @@
 <div align="center"><img src="https://static.thenounproject.com/png/2206184-200.png"></div>
 <h1 align="center">About Chat House</h1>
-<p align="center"><a href="https://github.com/OreoDivision/chat-house#about">About</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-contribute">How to contribute</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-run">How to run</a> · <a href="https://trello.com/b/CCdaLcA9">Trello</a> · <a href="https://github.com/OreoDivision/chat-house/blob/master/FAQ.md">FAQ</a></p>
+<h2 align="center"><a href="https://github.com/OreoDivision/chat-house#about">About</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-contribute">How to contribute</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-run">How to run</a> · <a href="https://trello.com/b/CCdaLcA9">Trello</a> · <a href="https://github.com/OreoDivision/chat-house/blob/master/FAQ.md">FAQ</a></h2>
 
 ---
 
