@@ -2,4 +2,4 @@
 
 | Name             |      What They Are Doing      |      Position      |
 | :------------------- | :-------------------: | :-------------------:
-| [@OreoDivision]       |      Making the app       |       Head Dev       |
+| [@OreoDivision](https://github.com/OreoDivision)       |      Making the app       |       Head Dev       |
