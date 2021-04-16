@@ -55,14 +55,13 @@ io.on('connection', (socket) => {
 		callback({ roomname: rooms[room].name });
 	})
 
-	socket.on('send message', ( name, room, message, callback ) => {
+	socket.on('send message', ( name, room, message ) => {
 		console.log(message)
 		let id = checkMessageId(room);
 
 		rooms[room].messages.push(id);
 		socket.emit('message', { name, sendMessage: message, id })
 		socket.to(rooms[room]).emit('message', { name, sendMessage: message, id })
-		callback()
 	})
 
 	socket.on('check name', (name, room, callback) => {
