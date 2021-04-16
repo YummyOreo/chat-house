@@ -13,6 +13,12 @@
 | [Dinner](https://github.com/OreoDivision/chat-house)       |      Coming Soon       |
 | [Brunch](https://github.com/OreoDivision/chat-house)       |      Coming Soon       |
 
+## Branches
+Only Ones that **Wont** go away
+
+| Branch             |      Description      |
+| :------------------- | :-------------------: |
+| [master/main](https://github.com/OreoDivision/chat-house/)       |      The sorce code for the chat app       |
 ## About
 
 Chat House, is a app for creators. You can make different types of rooms for different purposes!
