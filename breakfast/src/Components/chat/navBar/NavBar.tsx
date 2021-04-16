@@ -1,7 +1,7 @@
 import React from 'react';
 import io from 'socket.io-client';
 
-import "../main.css";
+import "../../main.css";
 
 const NavBar = ({roomName, changeName}: any) => {
 

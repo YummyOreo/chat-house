@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import queryString from 'query-string';
 import io from 'socket.io-client';
 
-import NavBar from './NavBar.js'
-import Input from './input.js'
-import Messages from './Messages.js'
-import UserBar from './userBar.js'
+import NavBar from './navBar/NavBar'
+import Input from './input/input'
+import Messages from './messages/Messages'
+import UserBar from './userBar/userBar'
 
 import "../main.css";
 
