@@ -1,8 +1,9 @@
 import React from 'react';
+import io from 'socket.io-client';
 
 import "../main.css";
 
-const NavBar = ({roomName}: any) => {
+const NavBar = ({roomName, changeName}: any) => {
 
 	const sticky: any = {
 		position: "fixed",
@@ -20,7 +21,7 @@ const NavBar = ({roomName}: any) => {
 			<nav style={stickyInner}>
 				<div className='nav-wrapper'>
 					<a href="/" className="waves-effect waves-light btn">Back</a>
-					<a id="change name" className="waves-effect waves-light btn">Change Name</a>
+					<a id="change name" className="waves-effect waves-light btn" onClick={() => {changeName()}}>Change Name</a>
 					<a className="brand-logo center">{roomName}</a>
 				</div>
 			</nav>

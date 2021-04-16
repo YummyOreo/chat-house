@@ -9,7 +9,7 @@ import UserBar from './userBar.js'
 
 import "../main.css";
 
-let socket: any = '';
+let socket: any;
 
 var connectionOptions: any =  {
 			"force new connection" : true,
@@ -21,6 +21,7 @@ var connectionOptions: any =  {
 const Chat = ({ location }: {location:any}) => {
 
 	function promptNameFunc(socket: any, room: any) {
+		console.log(socket)
 		let tryName = prompt('Whats your name');		
 		socket.emit('check name', tryName, room, (result: any) => {
 			if (result == true){
@@ -37,7 +38,7 @@ const Chat = ({ location }: {location:any}) => {
 	let [name, setName] = useState('');
 	let [room, setRoom] = useState('');
 
-	let [users, setUsers] = useState([]);
+	let [users, setUsers] = useState(['']);
 
 	let [messages, setMessages] = useState({ 1: {name: "System", message: "This is the start of the chat"}});
 	let [message, setMessage] = useState([]);
@@ -45,6 +46,8 @@ const Chat = ({ location }: {location:any}) => {
 	let [systems] = useState([]);
 
 	let [roomName, setRoomName] = useState('');
+
+	let [newName, setNewName] = useState('');
 
 	const ENDPOINT = 'localhost:5000';
 
@@ -95,6 +98,10 @@ const Chat = ({ location }: {location:any}) => {
 			setUsers(userList)
 		})
 	}, [users])
+	
+	function changeNameEmit(newName: any) {
+		socket.emit("name change", newName, room)
+	}
 
 	const sendMessage = (event: any) => {
 		event.preventDefault();
@@ -105,10 +112,25 @@ const Chat = ({ location }: {location:any}) => {
 
 	}
 
+	const changeName = () => {
+		console.log(socket)
+		let testName: any = prompt('Whats your name');	
+		if (testName == null || testName == ''){
+			changeName()
+		}
+
+		if (users.includes(testName) && testName != null){
+			changeName()
+		} else {
+			setNewName(testName)
+			changeNameEmit(testName)
+		}
+	}
+
 	return (
 		<div>
 		<div style={{"zIndex": 10}}>
-			<NavBar roomName={roomName} />
+			<NavBar roomName={roomName} changeName={changeName}/>
 		</div>	
 				<br/>
 				<br/>

@@ -55,14 +55,13 @@ io.on('connection', (socket) => {
 		callback({ roomname: rooms[room].name });
 	})
 
-	socket.on('send message', ( name, room, message, callback ) => {
+	socket.on('send message', ( name, room, message ) => {
 		console.log(message)
 		let id = checkMessageId(room);
 
 		rooms[room].messages.push(id);
 		socket.emit('message', { name, sendMessage: message, id })
 		socket.to(rooms[room]).emit('message', { name, sendMessage: message, id })
-		callback()
 	})
 
 	socket.on('check name', (name, room, callback) => {
@@ -71,6 +70,14 @@ io.on('connection', (socket) => {
 		} else {
 			callback(false)
 		}
+	})
+
+	socket.on('name change', (newName, room) => {
+		const oldName = rooms[room].users[socket.id]
+		rooms[room].users[socket.id] = newName;
+		delete rooms[room].name[oldName]
+		rooms[room].name[newName] = socket.id
+		updateUserList({socket, rooms, room})
 	})
 
 	socket.on('disconnect', () => {
