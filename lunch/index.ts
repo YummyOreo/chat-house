@@ -101,23 +101,26 @@ io.on("connection", (socket) => {
 	message: the content of the messsage
 	*/
   socket.on("send message", (name, room, message) => {
-    if (message.startsWith('!')) {
-			const [command, ...args] = message
-			.trim()
-			.substring('!'.length)
-			.split(/\s+/);
-      if (command === 'kick'){
-        if (socket.id != rooms[room].owner) {
-          return;
-        }
+    if (message.startsWith("!")) {
+      const [command, ...args] = message
+        .trim()
+        .substring("!".length)
+        .split(/\s+/);
+      if (command === "kick") {
+        console.log("YAY");
         let kickName = args.slice(0).join(" ");
-        kickName = kickName.trim()
-        if (rooms[room].names[kickName] != null){
-          let id = rooms[room].name[kickName]
-          socket.to(id).emit('kick')
+        console.log(kickName);
+        kickName = kickName.trim();
+        console.log(kickName);
+        if (rooms[room].names[kickName] != null) {
+          let id = rooms[room].names[kickName];
+          socket.to(id).emit("kick");
+          console.log(id);
+          console.log(socket.id);
           return;
         }
       }
+    }
     // Gets the ID of the message
     let id = checkMessageId(room);
 
