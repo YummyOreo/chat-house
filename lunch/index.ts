@@ -6,7 +6,7 @@ const http = require('http');
 // All utils
 const { addUser, removeUser, makeRoom } = require('./utils/users')
 const { updateUserList } = require('./utils/utils')
-let rooms = {  'test': {name: "test", users: {}, names: {}, owner: 'owner', messages: [1]} };
+let rooms = {  'test': {name: "test", users: {}, names: {}, owner: 'owner', messages: [1], ownerID: 1} };
 
 const PORT = process.env.PORT || 5000;
 
@@ -16,7 +16,7 @@ const router = require("./router/router");
 //Setups the server
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);	
+const io = socketio(server);
 
 
 app.use(router);
@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
 
 		console.log(rooms)
 		*/
-		// joins the toom
+		// joins the room
 		socket.join(rooms[room])
 		// Updates the user list on the left of the client
 		updateUserList({socket, rooms, room});
@@ -69,7 +69,12 @@ io.on('connection', (socket) => {
 		}
 		console.log(userList)
 		*/
-		callback({ roomname: rooms[room].name });
+		if (rooms[room].owner === socket.id){
+			callback({ roomname: rooms[room].name, ownerID: rooms[room].ownerID, owner: true });
+		} else{
+			callback({ roomname: rooms[room].name, ownerID: false, owner: false });
+		}
+		
 	})
 	//For sending a message (Every messasge even join and leave)
 	/*
