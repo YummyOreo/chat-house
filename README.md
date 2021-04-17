@@ -10,8 +10,8 @@
 | :------------------- | :-------------------: |
 | [breakfast](breakfast)       |      The sorce code for the client side (In Ts/React)       |
 | [lunch](lunch)       |      The sorce code for the server (In TS)       |
-| [Dinner](https://github.com/OreoDivision/chat-house)       |      Coming Soon       |
-| [Brunch](https://github.com/OreoDivision/chat-house)       |      Coming Soon       |
+| [Dinner](https://github.com/OreoDivision/chat-house)       |      Coming Soon (API)       |
+| [Brunch](https://github.com/OreoDivision/chat-house)       |      Coming Soon (Docs)       |
 
 ## Branches
 Only Ones that **Wont** go away
