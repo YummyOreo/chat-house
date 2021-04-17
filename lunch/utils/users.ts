@@ -1,5 +1,5 @@
 // How a room looks 
-// rooms = { id: {name: '', users: {}, names: {}, owner: '', messages: [] }
+// rooms = { id: {name: '', users: {}, names: {}, owner: '', messages: [], ownerID: \*int*\ }
 
 // Add a user to a room
 /*
@@ -10,6 +10,9 @@ rooms: all the rooms
 */
 const addUser = ({ userID, userName, roomID, rooms }) => {
 	// If the name is null, undefined, or '' it sets it to Guest
+	if (rooms[roomID].owner == ''){
+		rooms[roomID].owner = userID
+	}
 	if (userName == null || userName == undefined || userName == '') userName = 'Guest'
 	/*
 	userName = userName.trim()
@@ -52,7 +55,7 @@ rooms: all the rooms
 */
 const makeRoom = ({ roomID, RoomName, userName, owner, userID, rooms }) => {
 	// Makes it
-	rooms[roomID] = { name: { RoomName }, users: { userID: userName }, names: { userName: userID }, owner: owner, messages: [1] };
+	rooms[roomID] = { name: { RoomName }, users: {}, names: {}, owner: '', messages: [1] };
 	return rooms;
 }
 
