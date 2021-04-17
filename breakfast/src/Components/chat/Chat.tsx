@@ -80,6 +80,12 @@ const Chat = ({ location }: {location:any}) => {
 
 		 }, 100);
 		
+		
+		socket.on('kick', () => {
+			socket.emit("disconnect", room);
+			socket.off();
+			window.location.href = '/'
+		})
 
 
 		return () => {
