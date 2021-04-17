@@ -4,7 +4,7 @@ import React from 'react';
 
 import Message from "./message/message.js"
 
-import "../main.css";
+import "../../main.css";
 import "./noScrollBar.css";
 
 const Messages = ({ messages }: any) => {

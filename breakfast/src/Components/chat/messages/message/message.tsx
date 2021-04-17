@@ -1,6 +1,6 @@
 import React from 'react';
 
-import "../../main.css";
+import "../../../main.css";
 
 const Message = ({ message }: {message:any}) => {
 	return (
