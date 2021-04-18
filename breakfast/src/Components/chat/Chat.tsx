@@ -79,7 +79,6 @@ const Chat = ({ location }: {location:any}) => {
 			console.log(roomName)
 
 		 }, 100);
-		
 
 
 		return () => {
@@ -88,6 +87,16 @@ const Chat = ({ location }: {location:any}) => {
 			socket.off();
 		}
 	}, [ENDPOINT, location.search]);
+
+	useEffect(() => {
+		socket.on('kicked', (id: any) => {
+			console.log('Kicked')
+			console.log(socket.id)
+			//socket.emit("disconnect", room);
+			//socket.off();
+			window.location.href = '/'
+		})
+	})
 
 	useEffect(() => {
 		//all messages
