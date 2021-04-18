@@ -40,7 +40,7 @@ const Chat = ({ location }: {location:any}) => {
 
 	let [users, setUsers] = useState(['']);
 
-	let [messages, setMessages] = useState({ 1: {name: "System", message: "This is the start of the chat"}});
+	let [messages, setMessages] = useState({ 1: {name: "System", message: "This is the start of the chat", mention: true}});
 	let [message, setMessage] = useState([]);
 
 	let [systems] = useState([]);
@@ -100,11 +100,13 @@ const Chat = ({ location }: {location:any}) => {
 
 	useEffect(() => {
 		//all messages
-		socket.on('message', ({ name, sendMessage, id }: {name:any, sendMessage:any, id:any}) => {
+		socket.on('message', ({ nameSend, sendMessage, id }: {nameSend:any, sendMessage:any, id:any}) => {
 			//console.log(name)
 			//messages[id] = {name, message: sendMessage};
 			let idValue = id
-			setMessages({...messages, [idValue]: {name, message: sendMessage}})
+			let mention = false
+			if (sendMessage.includes(`@${name}`)){ mention = true}
+			setMessages({...messages, [idValue]: {name: nameSend, message: sendMessage, mention}})
 			console.log(messages)
 		});
 	}, [messages]);
