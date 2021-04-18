@@ -52,6 +52,8 @@ const Chat = ({ location }: {location:any}) => {
 	let [owner, setOwner] = useState(false);
 	let [ownerID, setOwnerID] = useState('');
 
+	let [type, setType] = useState('');
+
 	const ENDPOINT = 'localhost:5000';
 
 	useEffect(() => {
@@ -68,8 +70,9 @@ const Chat = ({ location }: {location:any}) => {
 
 			setRoom(room);
 
-			socket.emit('join', { name: promptName, room }, ({ roomname, ownerID, owner }: any) => {
+			socket.emit('join', { name: promptName, room }, ({ roomname, ownerID, owner, type }: any) => {
 				setRoomName(roomname);
+				setType(type)
 				console.log(users)
 				if (ownerID && owner == true){
 					setOwner(true)
