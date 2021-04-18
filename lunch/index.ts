@@ -114,7 +114,7 @@ io.on("connection", (socket) => {
         console.log(kickName);
         if (rooms[room].names[kickName] != null) {
           let id = rooms[room].names[kickName];
-          socket.to(id).emit("kick");
+          socket.to(rooms[room]).emit("kicked", id);
           console.log(id);
           console.log(socket.id);
           return;

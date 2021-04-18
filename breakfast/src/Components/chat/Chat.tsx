@@ -89,8 +89,9 @@ const Chat = ({ location }: {location:any}) => {
 	}, [ENDPOINT, location.search]);
 
 	useEffect(() => {
-		socket.on('kick', () => {
+		socket.on('kicked', (id: any) => {
 			console.log('Kicked')
+			console.log(socket.id)
 			//socket.emit("disconnect", room);
 			//socket.off();
 			window.location.href = '/'
