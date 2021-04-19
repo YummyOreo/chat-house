@@ -23,7 +23,7 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 				</form>
 			</div>
 		)
-	} else if (type === 'announcement'){
+	} else if (type === 'announcement' && owner === false){
 		let placeholderText
 		let disabled: boolean;
 		if (owner === true){
@@ -55,6 +55,26 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 					</form>
 				</div>
 			)
+	} else {
+		return (
+			<div>
+				<form>
+					<input
+					style={{color: "white"}}
+					type="text"
+					placeholder="Message"
+					onChange={(event) => setMessage(event.target.value)} 
+					onKeyPress={event => event.key === "Enter" ? sendMessage(event) : null}
+					/>
+					<button className="waves-effect waves-light btn" onClick={(event: any) => {
+						if (event == '') return;
+						sendMessage(event)
+						
+					}}>Send
+					</button>
+				</form>
+			</div>
+		)
 	}
 }
 

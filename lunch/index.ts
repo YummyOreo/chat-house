@@ -11,10 +11,10 @@ let rooms = {
     name: "test",
     users: {},
     names: {},
-    owner: "owner",
+    owner: "",
     messages: [1],
     ownerID: 1,
-    type: "chat",
+    type: "announcement",
   },
 };
 

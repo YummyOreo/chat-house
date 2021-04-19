@@ -41,7 +41,7 @@ const removeUser = ({ userID, userName, roomID, rooms }) => {
 
   // If its the owner delets the owner
   if (userID == rooms[roomID].owner) {
-    delete rooms[roomID].owner;
+    rooms[roomID].owner = "";
   }
   return rooms;
 };

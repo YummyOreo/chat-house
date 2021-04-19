@@ -6,7 +6,7 @@ const Message = ({ message }: {message:any}) => {
 	if (message.mention == false){
 		return (
 
-			<div style={{color: "white", backgroundColor: "#83ce73", borderRadius: "10px", marginRight: "min"}}>
+			<div style={{color: "white", backgroundColor: "", borderRadius: "10px", marginRight: "min", height: "content"}}>
 				<p style={{marginLeft: "10px"}}>
 				{message.name}
 				</p>
@@ -18,7 +18,7 @@ const Message = ({ message }: {message:any}) => {
 		)
 	} else {
 		return (
-			<div style={{color: "white", backgroundColor: "#001eff", borderRadius: "10px", marginRight: "min"}}>
+			<div style={{color: "white", backgroundColor: "#001eff", borderRadius: "10px", marginRight: "min", height: "content", minHeight: "30px", verticalAlign: "50%", flexWrap: 'wrap'}}>
 					<p style={{marginLeft: "10px"}}>
 					{message.name}
 					</p>

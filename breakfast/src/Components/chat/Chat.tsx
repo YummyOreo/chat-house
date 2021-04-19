@@ -74,12 +74,14 @@ const Chat = ({ location }: {location:any}) => {
 				setRoomName(roomname);
 				setType(type)
 				console.log(users)
-				if (ownerID && owner == true){
+				console.log(owner)
+				if (owner == true){
 					setOwner(true)
 					setOwnerID(ownerID)
 				}
 			});
 			console.log(roomName)
+			console.log(owner)
 
 		 }, 100);
 
