@@ -24,7 +24,7 @@ Only Ones that **Wont** go away
 Chat House, is a app for creators. You can make different types of rooms for different purposes!
 
 ## Notable features:
-- [ ] No Login
+- [x] No Login
 
 - [ ] Make Rooms
 
