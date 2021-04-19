@@ -166,7 +166,7 @@ const Chat = ({ location }: {location:any}) => {
 					</div>
 					<br/>
 					<br/>
-						<Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
+						<Input message={message} setMessage={setMessage} sendMessage={sendMessage} type={type} owner={owner}/>
 					<br/>
 				</div>
 
