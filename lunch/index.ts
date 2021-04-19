@@ -11,9 +11,10 @@ let rooms = {
     name: "test",
     users: {},
     names: {},
-    owner: "owner",
+    owner: "",
     messages: [1],
     ownerID: 1,
+    type: "announcement",
   },
 };
 
@@ -89,9 +90,15 @@ io.on("connection", (socket) => {
         roomname: rooms[room].name,
         ownerID: rooms[room].ownerID,
         owner: true,
+        type: rooms[room].type,
       });
     } else {
-      callback({ roomname: rooms[room].name, ownerID: false, owner: false });
+      callback({
+        roomname: rooms[room].name,
+        ownerID: false,
+        owner: false,
+        type: rooms[room].type,
+      });
     }
   });
   //For sending a message (Every messasge even join and leave)
