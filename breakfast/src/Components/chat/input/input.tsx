@@ -24,19 +24,30 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 			</div>
 		)
 	} else if (type === 'announcement'){
+		let placeholderText
+		let disabled: boolean;
 		if (owner === true){
-			return (
+			placeholderText = "Message"; 
+			disabled = false
+		} else {
+			placeholderText = "You Can Not Chat Here"
+			disabled = true
+		}
+		return (
 				<div>
 					<form>
 						<input
+						disabled = {disabled}
 						style={{color: "white"}}
 						type="text"
-						placeholder="Message"
+						placeholder={placeholderText}
 						onChange={(event) => setMessage(event.target.value)} 
-						onKeyPress={event => event.key === "Enter" ? sendMessage(event) : null}
+						onKeyPress={event => event.key === "Enter" && disabled === false ? sendMessage(event) : null}
 						/>
-						<button className="waves-effect waves-light btn" onClick={(event: any) => {
-							if (event == '') return;
+						<button 
+						disabled={disabled}
+						className="waves-effect waves-light btn" onClick={(event: any) => {
+							if (event == '' || disabled == true) return;
 							sendMessage(event)
 							
 						}}>Send
@@ -44,22 +55,6 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 					</form>
 				</div>
 			)
-		} else {
-			return (
-				<div>
-					<form>
-						<input
-						disabled = {true}
-						style={{color: "white"}}
-						type="text"
-						placeholder="You Can Not Chat Here"
-						/>
-						<button className="waves-effect waves-light btn" >Send
-						</button>
-					</form>
-				</div>
-			)
-		}
 	}
 }
 
