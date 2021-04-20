@@ -9,9 +9,10 @@
 | Codebase             |      Description      |
 | :------------------- | :-------------------: |
 | [breakfast](breakfast)       |      The sorce code for the client side (In Ts/React)       |
+| [Brunch](https://github.com/OreoDivision/chat-house)       |      Coming Soon (Docs/md)       |
 | [lunch](lunch)       |      The sorce code for the server (In TS)       |
 | [Dinner](https://github.com/OreoDivision/chat-house)       |      Coming Soon (API/Elixir)       |
-| [Brunch](https://github.com/OreoDivision/chat-house)       |      Coming Soon (Docs/md)       |
+
 
 ## Branches
 Only Ones that **Wont** go away
