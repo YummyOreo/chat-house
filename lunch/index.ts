@@ -67,12 +67,12 @@ io.on("connection", (socket) => {
     rooms[room].messages.push(id);
     socket.emit("message", {
       name: "System",
-      sendMessage: `${name} has joined the room!`,
+      sendMessage: `@${name} has joined the room!`,
       id,
     });
     socket.to(rooms[room]).emit("message", {
       name: "System",
-      sendMessage: `${name} has joined the room!`,
+      sendMessage: `@${name} has joined the room!`,
       id,
     });
     /*
@@ -210,7 +210,7 @@ io.on("connection", (socket) => {
     rooms[room].messages.push(id);
     socket.to(rooms[room]).emit("message", {
       name: "System",
-      sendMessage: `${rooms[room].users[socket.id]} has left.`,
+      sendMessage: `@${rooms[room].users[socket.id]} has left.`,
       id,
     });
     // Removes the user
