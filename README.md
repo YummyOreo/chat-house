@@ -1,6 +1,6 @@
 <div align="center"><img src="https://static.thenounproject.com/png/2206184-200.png"></div>
 <h1 align="center">About Chat House</h1>
-<h3 align="center"><a href="https://github.com/OreoDivision/chat-house#about">About</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-contribute">How to contribute</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-run">How to run</a> · <a href="https://trello.com/b/CCdaLcA9">Trello</a> · <a href="https://github.com/OreoDivision/chat-house/blob/master/FAQ.md">FAQ</a></h3>
+<h3 align="center"><a href="#about">About</a> · <a href="#how-to-contribute">How to contribute</a> · <a href="#how-to-run-the-app">How to run</a> · <a href="https://trello.com/b/CCdaLcA9">Trello</a> · <a href="FAQ.md">FAQ</a></h3>
 
 ---
 
@@ -10,8 +10,8 @@
 | :------------------- | :-------------------: |
 | [breakfast](breakfast)       |      The sorce code for the client side (In Ts/React)       |
 | [lunch](lunch)       |      The sorce code for the server (In TS)       |
-| [Dinner](https://github.com/OreoDivision/chat-house)       |      Coming Soon (API)       |
-| [Brunch](https://github.com/OreoDivision/chat-house)       |      Coming Soon (Docs)       |
+| [Dinner](#structure)       |      Coming Soon (API/Elixir)       |
+| [Brunch](#structure)       |      Coming Soon (Docs/md)       |
 
 ## Branches
 Only Ones that **Wont** go away
@@ -28,7 +28,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
 
 - [ ] Make Rooms
 
-- [ ] Room Types
+- [x] Room Types
 
 ## How to contribute:
 
@@ -38,7 +38,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
 Or
 * Find something to add to
 
-#### Aslo make shoure what you want to work on is not in [Working On](https://github.com/OreoDivision/chat-house/blob/master/Working%20On.md)
+#### Aslo make shoure what you want to work on is not in [Working On](Working On.md)
 
 ### Then contact **OreoDivision** on discord @ OreoDivision#0001
 
@@ -58,7 +58,7 @@ Make shoure you add comments and only change what you need to
 
 Open a pr with a description
 
-## How to run
+## How to run the app
 
 There are 2 things to run, with the same command.
 
