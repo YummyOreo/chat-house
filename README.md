@@ -1,6 +1,6 @@
 <div align="center"><img src="https://static.thenounproject.com/png/2206184-200.png"></div>
 <h1 align="center">About Chat House</h1>
-<h3 align="center"><a href="https://github.com/OreoDivision/chat-house#about">About</a> · <a href="https://github.com/OreoDivision/chat-house#how-to-contribute">How to contribute</a> · <a href="#how-to-run-the-app">How to run</a> · <a href="https://trello.com/b/CCdaLcA9">Trello</a> · <a href="https://github.com/OreoDivision/chat-house/blob/master/FAQ.md">FAQ</a></h3>
+<h3 align="center"><a href="#about">About</a> · <a href="#how-to-contribute">How to contribute</a> · <a href="#how-to-run-the-app">How to run</a> · <a href="https://trello.com/b/CCdaLcA9">Trello</a> · <a href="FAQ.md">FAQ</a></h3>
 
 ---
 
@@ -38,7 +38,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
 Or
 * Find something to add to
 
-#### Aslo make shoure what you want to work on is not in [Working On](https://github.com/OreoDivision/chat-house/blob/master/Working%20On.md)
+#### Aslo make shoure what you want to work on is not in [Working On](Working On.md)
 
 ### Then contact **OreoDivision** on discord @ OreoDivision#0001
 
