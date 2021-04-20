@@ -107,13 +107,26 @@ io.on("connection", (socket) => {
 	room: the room id
 	message: the content of the messsage
 	*/
-  socket.on("send message", (name, room, message) => {
+  socket.on("send message", (name, room, message, ownerID) => {
     if (message.startsWith("!")) {
       const [command, ...args] = message
         .trim()
         .substring("!".length)
         .split(/\s+/);
       if (command === "kick") {
+        if (rooms[room].owner != socket.id || ownerID != rooms[room].ownerID) {
+          let sendId = checkMessageId(room);
+
+          // Emits the message to the room
+          rooms[room].messages.push(sendId);
+
+          socket.emit("message", {
+            name: "System",
+            sendMessage: `You do not have the permission to use this command!`,
+            sendId,
+          });
+          return;
+        }
         // Add owner check
         console.log("YAY");
         let kickName = args.slice(0).join(" ");

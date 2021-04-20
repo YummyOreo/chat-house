@@ -130,7 +130,7 @@ const Chat = ({ location }: {location:any}) => {
 		event.preventDefault();
 
 		if(message) {
-			socket.emit('send message', name, room, message);
+			socket.emit('send message', name, room, message, ownerID);
 		}
 
 	}
