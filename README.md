@@ -28,7 +28,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
 
 - [ ] Make Rooms
 
-- [ ] Room Types
+- [x] Room Types
 
 ## How to contribute:
 
