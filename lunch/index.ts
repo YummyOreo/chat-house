@@ -114,6 +114,7 @@ io.on("connection", (socket) => {
         .substring("!".length)
         .split(/\s+/);
       if (command === "kick") {
+        // Add owner check
         console.log("YAY");
         let kickName = args.slice(0).join(" ");
         console.log(kickName);
@@ -124,6 +125,17 @@ io.on("connection", (socket) => {
           socket.to(rooms[room]).emit("kicked", id);
           console.log(id);
           console.log(socket.id);
+          // Gets the ID of the message
+          let sendId = checkMessageId(room);
+
+          // Emits the message to the room
+          rooms[room].messages.push(sendId);
+
+          socket.emit("message", {
+            name: "System",
+            sendMessage: `${kickName} has been kicked`,
+            sendId,
+          });
           return;
         }
       }
