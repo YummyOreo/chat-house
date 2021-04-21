@@ -23,9 +23,11 @@ This is the server folder for the chat app. It gest all requests from the client
 ### Socket.io 
 
 > [https://socket.io/](https://socket.io/)
+
 This is a module to send and receve request faster than HTTP requests
 
 ### Express
 
 > [https://expressjs.com/](https://expressjs.com/)
+
 This module helps make a server on a port.
