@@ -108,7 +108,3 @@ $ npm start
 ```
 
 In each!
-
-## Why are they called lunch and breakfast
-
-IDK WHY YOU ASK
