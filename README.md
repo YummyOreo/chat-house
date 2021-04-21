@@ -10,7 +10,7 @@
 | :--------------------- | :----------------------------------------------: |
 | [breakfast](breakfast) | The sorce code for the client side (In Ts/React) |
 | [lunch](lunch)         |      The sorce code for the server (In TS)       |
-| [Dinner](#structure)   |             Coming Soon (API/Elixir)             |
+| [Dinner](#structure)   |             Coming Soon (API)             |
 | [Brunch](#structure)   |              Coming Soon (Docs/md)               |
 
 ## Branches
