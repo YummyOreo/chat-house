@@ -128,11 +128,8 @@ io.on("connection", (socket) => {
           return;
         }
         // Add owner check
-        console.log("YAY");
         let kickName = args.slice(0).join(" ");
-        console.log(kickName);
         kickName = kickName.trim();
-        console.log(kickName);
         if (rooms[room].names[kickName] != null) {
           let id = rooms[room].names[kickName];
           socket.to(rooms[room]).emit("kicked", id);

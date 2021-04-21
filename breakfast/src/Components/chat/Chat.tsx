@@ -110,7 +110,8 @@ const Chat = ({ location }: {location:any}) => {
 			//messages[id] = {name, message: sendMessage};
 			let idValue = id
 			let mention = false
-			if (sendMessage.includes(`@${name}`)){ mention = true}
+			let lowerCaseName = sendMessage.toLowerCase()
+			if (lowerCaseName.includes(`@${name.toLowerCase()}`)){ mention = true}
 			setMessages({...messages, [idValue]: {name: nameSend, message: sendMessage, mention}})
 			console.log(messages)
 		});
