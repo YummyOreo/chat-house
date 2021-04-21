@@ -41,7 +41,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
   Or
 - Find something to add to
 
-#### Aslo make shoure what you want to work on is not in [Working On](Working On.md)
+#### Aslo make shoure what you want to work on is not in [Working On](Working%20On.md)
 
 ### Then contact **OreoDivision** on discord @ OreoDivision#0001
 
