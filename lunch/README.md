@@ -16,7 +16,7 @@ This is the server folder for the chat app. It gest all requests from the client
 
 | Modules Used |
 | :---------------------: |
-| [Socket.io](#Socket.io) |
+| [Socket.io](#socketio) |
 | [express](express) |
 | http |
 
