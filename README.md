@@ -8,9 +8,9 @@
 
 | Codebase               |                   Description                    |
 | :--------------------- | :----------------------------------------------: |
-| [breakfast](breakfast) | The sorce code for the client side (In Ts/React) |
-| [lunch](lunch)         |      The sorce code for the server (In TS)       |
-| [Dinner](#structure)   |             Coming Soon (API/Python)             |
+| [Breakfast](breakfast) | The sorce code for the client side (In Ts/React) |
+| [Lunch](lunch)         |      The sorce code for the server (In TS)       |
+| [Dinner](dinner)       |             Coming Soon (API/Python)             |
 | [Brunch](#structure)   |              Coming Soon (Docs/md)               |
 
 ## Branches
@@ -41,7 +41,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
   Or
 - Find something to add to
 
-#### Aslo make shoure what you want to work on is not in [Working On](Working%20On.md)
+#### Aslo make shoure what you want to work on is not in [Working On](WORKING_ON.md)
 
 ### Then contact **OreoDivision** on discord @ OreoDivision#0001
 
