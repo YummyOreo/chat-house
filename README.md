@@ -8,9 +8,9 @@
 
 | Codebase               |                   Description                    |
 | :--------------------- | :----------------------------------------------: |
-| [Breakfast](breakfast) | The sorce code for the client side (In Ts/React) |
-| [Lunch](lunch)         |      The sorce code for the server (In TS)       |
-| [Dinner](dinner)       |             Coming Soon (API/Python)             |
+| [Breakfast](breakfast) | The sorce code for the client side (TS/React) |
+| [Lunch](lunch)         |      The sorce code for the server (TS)       |
+| [Dinner](dinner)       |             The sorce code for the API (PY/Flask)             |
 | [Brunch](#structure)   |              Coming Soon (Docs/md)               |
 
 ## Branches
