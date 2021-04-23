@@ -7,6 +7,7 @@
 | Codebase/Folder               |                   Description                    |
 | :--------------------- | :----------------------------------------------: |
 | [app](app.py) | The main file for the API (PY) |
+| [utils](utils) | Utils functions for the API (PY) |
 | [test](test) | For tesing the API (PY) |
 
 ## How to run

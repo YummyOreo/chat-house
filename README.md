@@ -74,6 +74,8 @@ $ cd chat-house
 
 This will download the sorce for the chat app
 
+### To run the api, [go here](https://github.com/OreoDivision/chat-house/blob/master/dinner/README.md)
+
 ### Install Node JS
 
 To make the server and client work you need nodejs

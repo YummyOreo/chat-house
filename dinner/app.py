@@ -1,13 +1,21 @@
+# Imports
 import time
 import os
 import random
 from flask import Flask, request
 from flask_restful import Api, Resource, reqparse
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
+
+""" 
+Modules
+from utils import ___
+"""
+
 # Inits the API
 app = Flask(__name__)
 api = Api(app)
-# Gest the Server id
-serverID = os.environ['serverID']
 
 # bots and rooms bars
 bots = {}
@@ -33,7 +41,13 @@ add_room = reqparse.RequestParser()
 # A room id str
 add_room.add_argument("room", type=str, help="404 | Invalid Room", required=True)
 
-# Making a bot
+""" 
+Making the bot
+
+Name: from the URL, the name of the bot
+
+"""
+
 def ranId():
     id = random.randint(1, 10000000000)
     if id in bots:
@@ -41,18 +55,12 @@ def ranId():
     else:
         return id
 
-""" 
-Making the bot
-
-Name: from the URL, the name of the bot
-
-"""
 class Make_Bot(Resource):
     def put(self, name):
         id = ranId()
         bots[str(id)] = {"name": name, "rooms": []}
         print(bots)
-        return {"token": id}
+        return id
 
 """
 Delete and remove from a room
@@ -66,6 +74,8 @@ class delete_bot(Resource):
         if token not in bots:
             return {"Status": '404 | Invalid Token'}
         del bots[token]
+        return {"Status": '200'}
+        
     """
     Patch/Remove from a room
     Token: from the URL, the token of the bot
@@ -78,6 +88,7 @@ class delete_bot(Resource):
         if args['room'] not in rooms:
             return {"Status": '404 | Invalid Room'}
         bots[token]['rooms'].pop(bots[token]['rooms'].index(args['room']))
+        return {"Status": '200'}
 
 # add a bot to a room and get the rooms that the bots are in!
 class Add_Room(Resource):
@@ -125,9 +136,9 @@ class stats_room(Resource):
             return {"users": '404 | Invalid Token'}
         if (args['room'] not in rooms):
             return {"users": '404 | Invalid Room'}
-        if (args[room] not in rooms[token]['rooms']):
+        if (args['room'] not in bots[token]['rooms']):
             return {"users": '404 | Not Access'}
-        return {"users": rooms[room].users}
+        return {"users": rooms[args['room']]['users']}
 
 """
 Get the number of users in the hole chat
@@ -149,7 +160,7 @@ Only for the server updates the rooms var
 
 class only_server(Resource):
     def put(self, id):
-        if str(id) != str(serverID):
+        if str(id) != str(config['SERVERID']):
             return 404
         args = server.parse_args()
         rooms = args['rooms']
@@ -160,11 +171,10 @@ api.add_resource(Add_Room, "/room/<string:token>")
 api.add_resource(stats_room, "/stats_room/<string:token>")
 api.add_resource(stats_all, "/stats_all/<string:token>")
 api.add_resource(delete_bot, "/manage_bot/<string:token>")
-api.add_resource(delete_bot, "/manage_bot/<string:token>")
 
 # Only For SERVER (Will have a password that will be changed when IM DONE)
 
-api.add_resource(only_server, f"/add_to_server_{serverID}/<int:id>")
+api.add_resource(only_server, f"/add_to_server_{config['SERVERID']}/<int:id>")
 
 # runs the app
 
