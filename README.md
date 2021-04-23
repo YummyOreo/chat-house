@@ -8,9 +8,9 @@
 
 | Codebase               |                   Description                    |
 | :--------------------- | :----------------------------------------------: |
-| [breakfast](breakfast) | The sorce code for the client side (In Ts/React) |
-| [lunch](lunch)         |      The sorce code for the server (In TS)       |
-| [Dinner](#structure)   |             Coming Soon (API)             |
+| [Breakfast](breakfast) | The sorce code for the client side (TS/React) |
+| [Lunch](lunch)         |      The sorce code for the server (TS)       |
+| [Dinner](dinner)       |             The sorce code for the API (PY/Flask)             |
 | [Brunch](#structure)   |              Coming Soon (Docs/md)               |
 
 ## Branches
@@ -41,7 +41,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
   Or
 - Find something to add to
 
-#### Aslo make shoure what you want to work on is not in [Working On](Working%20On.md)
+#### Aslo make shoure what you want to work on is not in [Working On](WORKING_ON.md)
 
 ### Then contact **OreoDivision** on discord @ OreoDivision#0001
 
@@ -73,6 +73,8 @@ $ cd chat-house
 ```
 
 This will download the sorce for the chat app
+
+### To run the api, [go here](https://github.com/OreoDivision/chat-house/blob/master/dinner/README.md)
 
 ### Install Node JS
 
