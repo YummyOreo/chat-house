@@ -1,4 +1,4 @@
-<h1 align="center">Lunch (AKA Server)</h1>
+<h1 align="center">Dinner (AKA API)</h1>
 
 ---
 
