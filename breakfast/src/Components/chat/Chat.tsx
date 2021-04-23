@@ -20,12 +20,12 @@ var connectionOptions: any =  {
 
 const Chat = ({ location }: {location:any}) => {
 
-	function promptNameFunc(socket: any, room: any) {
+	function promptNameFunc(socket: any, House: any) {
 		console.log(socket)
 		let tryName = prompt('Whats your name');		
-		socket.emit('check name', tryName, room, (result: any) => {
+		socket.emit('check name', tryName, House, (result: any) => {
 			if (result == true){
-				promptNameFunc(socket, room)
+				promptNameFunc(socket, House)
 			} else {
 				console.log(tryName)
 				return tryName
@@ -36,7 +36,7 @@ const Chat = ({ location }: {location:any}) => {
 	}
 
 	let [name, setName] = useState('');
-	let [room, setRoom] = useState('');
+	let [House, setHouse] = useState('');
 
 	let [users, setUsers] = useState(['']);
 
@@ -45,7 +45,7 @@ const Chat = ({ location }: {location:any}) => {
 
 	let [systems] = useState([]);
 
-	let [roomName, setRoomName] = useState('');
+	let [HouseName, setHouseName] = useState('');
 
 	let [newName, setNewName] = useState('');
 
@@ -57,21 +57,21 @@ const Chat = ({ location }: {location:any}) => {
 	const ENDPOINT = 'localhost:5000';
 
 	useEffect(() => {
-		const {room}: any = queryString.parse(location.search);
+		const {house}: any = queryString.parse(location.search);
 
 		socket = io(ENDPOINT, connectionOptions);
 		setTimeout(() => { 
 			let promptName: string | null;
-			promptName = promptNameFunc(socket, room);
+			promptName = promptNameFunc(socket, house);
 			if (promptName == null) promptName = 'Guest'
 			console.log(promptName)
 
 			setName(promptName);
 
-			setRoom(room);
+			setHouse(house);
 
-			socket.emit('join', { name: promptName, room }, ({ roomname, ownerID, owner, type }: any) => {
-				setRoomName(roomname);
+			socket.emit('join', { name: promptName, House }, ({ Housename, ownerID, owner, type }: any) => {
+				setHouseName(Housename);
 				setType(type)
 				console.log(users)
 				console.log(owner)
@@ -80,14 +80,14 @@ const Chat = ({ location }: {location:any}) => {
 					setOwnerID(ownerID)
 				}
 			});
-			console.log(roomName)
+			console.log(HouseName)
 			console.log(owner)
 
 		 }, 100);
 
 
 		return () => {
-			socket.emit("disconnect", room);
+			socket.emit("disconnect", House);
 
 			socket.off();
 		}
@@ -97,7 +97,7 @@ const Chat = ({ location }: {location:any}) => {
 		socket.on('kicked', (id: any) => {
 			console.log('Kicked')
 			console.log(socket.id)
-			//socket.emit("disconnect", room);
+			//socket.emit("disconnect", House);
 			//socket.off();
 			window.location.href = '/'
 		})
@@ -124,14 +124,14 @@ const Chat = ({ location }: {location:any}) => {
 	}, [users])
 	
 	function changeNameEmit(newName: any) {
-		socket.emit("name change", newName, room)
+		socket.emit("name change", newName, House)
 	}
 
 	const sendMessage = (event: any) => {
 		event.preventDefault();
 
 		if(message) {
-			socket.emit('send message', name, room, message, ownerID);
+			socket.emit('send message', name, House, message, ownerID);
 		}
 
 	}
@@ -154,7 +154,7 @@ const Chat = ({ location }: {location:any}) => {
 	return (
 		<div>
 		<div style={{"zIndex": 10}}>
-			<NavBar roomName={roomName} changeName={changeName}/>
+			<NavBar HouseName={HouseName} changeName={changeName}/>
 		</div>	
 				<br/>
 				<br/>

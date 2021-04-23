@@ -19,7 +19,7 @@ api = Api(app)
 
 # bots and rooms bars
 bots = {}
-rooms = {"1": {"users": ["HEY", "2"]}}
+rooms = {}
 
 # For get stats for a room vars
 get_room = reqparse.RequestParser()
@@ -164,6 +164,7 @@ class only_server(Resource):
             return 404
         args = server.parse_args()
         rooms = args['rooms']
+        print(args)
 
 # adds all the urls to make requests
 api.add_resource(Make_Bot, "/make_bot/<string:name>")

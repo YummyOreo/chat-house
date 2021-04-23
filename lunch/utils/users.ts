@@ -1,71 +1,71 @@
 // How a room looks
-// rooms = { id: {name: '', users: {}, names: {}, owner: '', messages: [], ownerID: /*int*/, type: "" }
+// houses = { id: {name: '', users: {}, names: {}, owner: '', messages: [], ownerID: /*int*/, type: "" }
 // Types: Announcements, chat, qna, discord, more
 
 // Add a user to a room
 /*
 UserID: the socket id of the user
 userName: the name of the user
-roomID: the id of the room
-rooms: all the rooms
+houseID: the id of the room
+houses: all the houses
 */
-const addUser = ({ userID, userName, roomID, rooms }) => {
+const addUser = ({ userID, userName, houseID, houses }) => {
   // If the name is null, undefined, or '' it sets it to Guest
-  if (rooms[roomID].owner == "") {
-    rooms[roomID].owner = userID;
+  if (houses[houseID].owner == "") {
+    houses[houseID].owner = userID;
   }
   if (userName == null || userName == undefined || userName == "")
     userName = "Guest";
   /*
 	userName = userName.trim()
-	roomID = roomID.trim()
+	houseID = houseID.trim()
 	*/
 
-  //rooms[id] = { name: { RoomName }, users: { userID: userName }, names: { userName: userID }, owner: owner };
+  //houses[id] = { name: { RoomName }, users: { userID: userName }, names: { userName: userID }, owner: owner };
   // Adds to the user list
-  rooms[roomID].users[userID] = userName;
-  rooms[roomID].names[userName] = userID;
-  return rooms;
+  houses[houseID].users[userID] = userName;
+  houses[houseID].names[userName] = userID;
+  return houses;
 };
 // removes a user for the room
 /*
 userID: the id of the user
 userName: the name of the user
-roomID: the id of the room
-rooms: all the rooms
+houseID: the id of the room
+houses: all the houses
 */
-const removeUser = ({ userID, userName, roomID, rooms }) => {
+const removeUser = ({ userID, userName, houseID, houses }) => {
   // deletes the user from the room
-  delete rooms[roomID].users[userID];
-  delete rooms[roomID].names[userName];
+  delete houses[houseID].users[userID];
+  delete houses[houseID].names[userName];
 
   // If its the owner delets the owner
-  if (userID == rooms[roomID].owner) {
-    rooms[roomID].owner = "";
+  if (userID == houses[houseID].owner) {
+    houses[houseID].owner = "";
   }
-  return rooms;
+  return houses;
 };
 // Makes a room
 /*
-roomsID: the id of the room (WIll change to making it here mby)
+housesID: the id of the room (WIll change to making it here mby)
 roomName: the name of the room
 userName: the name of the ownser
 owner: the iwner
 userID: the id of the user
-rooms: all the rooms
+houses: all the houses
 */
 // Needs editing when making the home page
 const makeRoom = ({
-  roomID,
+  houseID,
   RoomName,
   userName,
   owner,
   userID,
-  rooms,
+  houses,
   type,
 }) => {
   // Makes it
-  rooms[roomID] = {
+  houses[houseID] = {
     name: { RoomName },
     users: {},
     names: {},
@@ -73,7 +73,7 @@ const makeRoom = ({
     messages: [1],
     type: type,
   };
-  return rooms;
+  return houses;
 };
 
 // exports all funcs

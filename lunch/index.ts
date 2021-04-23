@@ -4,9 +4,9 @@ const http = require("http");
 //const cors = require('cors')
 
 // All utils
-const { addUser, removeUser, makeRoom } = require("./utils/users");
+const { addUser, removeUser, makehouse } = require("./utils/users");
 const { updateUserList } = require("./utils/utils");
-let rooms = {
+let houses = {
   test: {
     name: "test",
     users: {},
@@ -35,9 +35,9 @@ app.use(router);
 server.listen(PORT, () => console.log(`Server has started on port ${PORT}`));
 
 //Give the message a ID
-function checkMessageId(room) {
-  //Gest the heighest number in the room
-  let max = Math.max(...rooms[room].messages);
+function checkMessageId(house) {
+  //Gest the heighest number in the house
+  let max = Math.max(...houses[house].messages);
   max += 1; // adds one
   return max;
 }
@@ -47,78 +47,78 @@ io.on("connection", (socket) => {
   // When the user joins
   /*
 	name: the name of the user
-	room: the room id of the room
+	house: the house id of the house
 	*/
-  socket.on("join", ({ name, room }, callback) => {
-    // Adds the user to to room
-    rooms = addUser({ userID: socket.id, userName: name, roomID: room, rooms });
+  socket.on("join", ({ name, house }, callback) => {
+    // Adds the user to to house
+    houses = addUser({ userID: socket.id, userName: name, houseID: house, houses });
     /*
-		console.log(rooms[room].name)
+		console.log(houses[house].name)
 
-		console.log(rooms)
+		console.log(houses)
 		*/
-    // joins the room
-    socket.join(rooms[room]);
+    // joins the house
+    socket.join(houses[house]);
     // Updates the user list on the left of the client
-    updateUserList({ socket, rooms, room });
+    updateUserList({ socket, houses, house });
     // Makes the id for the join message
-    let id = checkMessageId(room);
+    let id = checkMessageId(house);
     // Sends the message
-    rooms[room].messages.push(id);
+    houses[house].messages.push(id);
     socket.emit("message", {
       name: "System",
-      sendMessage: `@${name} has joined the room!`,
+      sendMessage: `@${name} has joined the house!`,
       id,
     });
-    socket.to(rooms[room]).emit("message", {
+    socket.to(houses[house]).emit("message", {
       name: "System",
-      sendMessage: `@${name} has joined the room!`,
+      sendMessage: `@${name} has joined the house!`,
       id,
     });
     /*
 		let user: any;
 		let userList: any = [];
-		for (user in rooms[room].users){
-			console.log(rooms[room].users)
+		for (user in houses[house].users){
+			console.log(houses[house].users)
 			console.log(user)
-			userList.push(rooms[room].users[user])
+			userList.push(houses[house].users[user])
 		}
 		console.log(userList)
 		*/
-    if (rooms[room].owner === socket.id) {
+    if (houses[house].owner === socket.id) {
       callback({
-        roomname: rooms[room].name,
-        ownerID: rooms[room].ownerID,
+        housename: houses[house].name,
+        ownerID: houses[house].ownerID,
         owner: true,
-        type: rooms[room].type,
+        type: houses[house].type,
       });
     } else {
       callback({
-        roomname: rooms[room].name,
+        housename: houses[house].name,
         ownerID: false,
         owner: false,
-        type: rooms[room].type,
+        type: houses[house].type,
       });
     }
   });
   //For sending a message (Every messasge even join and leave)
   /*
 	name: the name of a sender
-	room: the room id
+	house: the house id
 	message: the content of the messsage
 	*/
-  socket.on("send message", (name, room, message, ownerID) => {
+  socket.on("send message", (name, house, message, ownerID) => {
     if (message.startsWith("!")) {
       const [command, ...args] = message
         .trim()
         .substring("!".length)
         .split(/\s+/);
       if (command === "kick") {
-        if (rooms[room].owner != socket.id || ownerID != rooms[room].ownerID) {
-          let sendId = checkMessageId(room);
+        if (houses[house].owner != socket.id || ownerID != houses[house].ownerID) {
+          let sendId = checkMessageId(house);
 
-          // Emits the message to the room
-          rooms[room].messages.push(sendId);
+          // Emits the message to the house
+          houses[house].messages.push(sendId);
 
           socket.emit("message", {
             name: "System",
@@ -130,16 +130,16 @@ io.on("connection", (socket) => {
         // Add owner check
         let kickName = args.slice(0).join(" ");
         kickName = kickName.trim();
-        if (rooms[room].names[kickName] != null) {
-          let id = rooms[room].names[kickName];
-          socket.to(rooms[room]).emit("kicked", id);
+        if (houses[house].names[kickName] != null) {
+          let id = houses[house].names[kickName];
+          socket.to(houses[house]).emit("kicked", id);
           console.log(id);
           console.log(socket.id);
           // Gets the ID of the message
-          let sendId = checkMessageId(room);
+          let sendId = checkMessageId(house);
 
-          // Emits the message to the room
-          rooms[room].messages.push(sendId);
+          // Emits the message to the house
+          houses[house].messages.push(sendId);
 
           socket.emit("message", {
             name: "System",
@@ -151,23 +151,23 @@ io.on("connection", (socket) => {
       }
     }
     // Gets the ID of the message
-    let id = checkMessageId(room);
+    let id = checkMessageId(house);
 
-    // Emits the message to the room
-    rooms[room].messages.push(id);
+    // Emits the message to the house
+    houses[house].messages.push(id);
 
     socket.emit("message", { name, sendMessage: message, id });
-    socket.to(rooms[room]).emit("message", { name, sendMessage: message, id });
+    socket.to(houses[house]).emit("message", { name, sendMessage: message, id });
   });
   // Checks the name of the user **When they join**
   /*
 	name: The name of the user (Not final)
-	room: the id of the room
+	house: the id of the house
 	callback: sending the message back
 	*/
-  socket.on("check name", (name, room, callback) => {
+  socket.on("check name", (name, house, callback) => {
     // Checks if the name DOES NOT EXIST :smart:
-    if (rooms[room].names[name] != null) {
+    if (houses[house].names[name] != null) {
       //Calls it back true
       callback(true);
     } else {
@@ -178,54 +178,54 @@ io.on("connection", (socket) => {
   // WHen a user want to chnage there name
   /*
 	newName: the new name of the user
-	room: the id of the room
+	house: the id of the house
 	*/
-  socket.on("name change", (newName, room) => {
+  socket.on("name change", (newName, house) => {
     //Gets the old name
-    const oldName = rooms[room].users[socket.id];
+    const oldName = houses[house].users[socket.id];
     // Changes the name in the ID sorted to the new name
-    rooms[room].users[socket.id] = newName;
+    houses[house].users[socket.id] = newName;
     // Deletes the name in the name sorted
-    delete rooms[room].name[oldName];
+    delete houses[house].name[oldName];
     // Makes a new one
-    rooms[room].name[newName] = socket.id;
+    houses[house].name[newName] = socket.id;
     // Updates the user list
-    updateUserList({ socket, rooms, room });
+    updateUserList({ socket, houses, house });
   });
   // When a user disconnects
   /*
 	None
 	*/
   socket.on("disconnect", () => {
-    // Gets the room of the user
-    let room = getUsersRooms(socket, rooms);
-    // if there not in a room, do nothing
-    if (room == undefined) return;
+    // Gets the house of the user
+    let house = getUsershouses(socket, houses);
+    // if there not in a house, do nothing
+    if (house == undefined) return;
     // make a messgae
-    let id = checkMessageId(room);
+    let id = checkMessageId(house);
     //sends the message
-    rooms[room].messages.push(id);
-    socket.to(rooms[room]).emit("message", {
+    houses[house].messages.push(id);
+    socket.to(houses[house]).emit("message", {
       name: "System",
-      sendMessage: `@${rooms[room].users[socket.id]} has left.`,
+      sendMessage: `@${houses[house].users[socket.id]} has left.`,
       id,
     });
     // Removes the user
-    rooms = removeUser({
+    houses = removeUser({
       userID: socket.id,
-      userName: rooms[room].users[socket.id],
-      roomID: room,
-      rooms,
+      userName: houses[house].users[socket.id],
+      houseID: house,
+      houses,
     });
     // Updates the list
-    updateUserList({ socket, rooms, room });
+    updateUserList({ socket, houses, house });
   });
 });
 
-function getUsersRooms(socket, rooms) {
-  // Loops all the rooms and checks if the user is there
-  let room;
-  for (room in rooms) {
-    if (rooms[room].users[socket.id] != null) return room; // returns the room id
+function getUsershouses(socket, houses) {
+  // Loops all the houses and checks if the user is there
+  let house;
+  for (house in houses) {
+    if (houses[house].users[socket.id] != null) return house; // returns the house id
   }
 }

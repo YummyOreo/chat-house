@@ -2,6 +2,13 @@ import requests
 
 BASE = "http://127.0.0.1:5000/"
 
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
+
+requests.put(BASE + f"/add_to_server_{config['SERVERID']}/{int(config['SERVERID'])}", {"rooms": {"1": {"users": ["HEY", "2"]}}})
+
+'''
 token1 = requests.put(BASE + "/make_bot/name")
 token = token1.json()
 print(token)
@@ -25,3 +32,4 @@ print(f"{response3.json()} all")
 print(f"{response5.json()} Delete Room")
 print(f"{response6.json()} rooms")
 print(f"{response7.json()} Delete")
+'''

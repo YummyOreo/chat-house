@@ -5,16 +5,16 @@ import "../main.css";
 
 const Home = () => {
 	const [name, setName] = useState('');
-	const [room, setRoom] = useState('');
+	const [House, setHouse] = useState('');
 
 	return (
 		<div>
 			<h1>
-			Join Room
+			Join House
 			</h1>
-				<div><input placeholder="Room" type='text' onChange={(event) =>{
-					setRoom(event.target.value)}}/></div>
-				<Link onClick={event => (!room) ? event.preventDefault() : null}to={`/chat?room=${room}`}>
+				<div><input placeholder="House" type='text' onChange={(event) =>{
+					setHouse(event.target.value)}}/></div>
+				<Link onClick={event => (!House) ? event.preventDefault() : null}to={`/chat?house=${House}`}>
 				<button type="submit">Join</button>
 				</Link>
 		</div>
