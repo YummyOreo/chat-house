@@ -57,20 +57,20 @@ const Chat = ({ location }: {location:any}) => {
 	const ENDPOINT = 'localhost:5000';
 
 	useEffect(() => {
-		const {room}: any = queryString.parse(location.search);
+		const { id }: any = queryString.parse(location.search);
 
 		socket = io(ENDPOINT, connectionOptions);
 		setTimeout(() => { 
 			let promptName: string | null;
-			promptName = promptNameFunc(socket, room);
+			promptName = promptNameFunc(socket, id);
 			if (promptName == null) promptName = 'Guest'
 			console.log(promptName)
 
 			setName(promptName);
 
-			setRoom(room);
-
-			socket.emit('join', { name: promptName, room }, ({ roomname, ownerID, owner, type }: any) => {
+			setRoom(id);
+			console.log(id + " " + room)
+			socket.emit('join', { name: promptName, id }, ({ roomname, ownerID, owner, type }: any) => {
 				setRoomName(roomname);
 				setType(type)
 				console.log(users)

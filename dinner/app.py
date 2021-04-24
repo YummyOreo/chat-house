@@ -4,9 +4,6 @@ import os
 import random
 from flask import Flask, request
 from flask_restful import Api, Resource, reqparse
-from dotenv import dotenv_values
-
-config = dotenv_values(".env")
 
 """ 
 Modules
@@ -154,27 +151,12 @@ class stats_all(Resource):
             users += 1
         return {"users": users}
 
-"""
-Only for the server updates the rooms var
-"""
-
-class only_server(Resource):
-    def put(self, id):
-        if str(id) != str(config['SERVERID']):
-            return 404
-        args = server.parse_args()
-        rooms = args['rooms']
-
 # adds all the urls to make requests
 api.add_resource(Make_Bot, "/make_bot/<string:name>")
 api.add_resource(Add_Room, "/room/<string:token>")
 api.add_resource(stats_room, "/stats_room/<string:token>")
 api.add_resource(stats_all, "/stats_all/<string:token>")
 api.add_resource(delete_bot, "/manage_bot/<string:token>")
-
-# Only For SERVER (Will have a password that will be changed when IM DONE)
-
-api.add_resource(only_server, f"/add_to_server_{config['SERVERID']}/<int:id>")
 
 # runs the app
 

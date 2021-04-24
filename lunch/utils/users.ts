@@ -1,3 +1,4 @@
+
 // How a room looks
 // rooms = { id: {name: '', users: {}, names: {}, owner: '', messages: [], ownerID: /*int*/, type: "" }
 // Types: Announcements, chat, qna, discord, more
@@ -11,6 +12,8 @@ rooms: all the rooms
 */
 const addUser = ({ userID, userName, roomID, rooms }) => {
   // If the name is null, undefined, or '' it sets it to Guest
+  console.log(rooms)
+  console.log(roomID)
   if (rooms[roomID].owner == "") {
     rooms[roomID].owner = userID;
   }
@@ -56,17 +59,14 @@ rooms: all the rooms
 */
 // Needs editing when making the home page
 const makeRoom = ({
-  roomID,
   RoomName,
-  userName,
-  owner,
-  userID,
   rooms,
   type,
+  roomID
 }) => {
   // Makes it
   rooms[roomID] = {
-    name: { RoomName },
+    name: RoomName,
     users: {},
     names: {},
     owner: "",

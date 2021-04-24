@@ -1,3 +1,4 @@
+var randomToken = require('random-token').create('abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ');
 const express = require("express");
 const socketio = require("socket.io");
 const http = require("http");
@@ -17,6 +18,8 @@ let rooms = {
     type: "announcement",
   },
 };
+
+const home = 'home'
 
 const PORT = process.env.PORT || 5000;
 
@@ -49,7 +52,7 @@ io.on("connection", (socket) => {
 	name: the name of the user
 	room: the room id of the room
 	*/
-  socket.on("join", ({ name, room }, callback) => {
+  socket.on("join", ({ name, id: room }, callback) => {
     // Adds the user to to room
     rooms = addUser({ userID: socket.id, userName: name, roomID: room, rooms });
     /*
@@ -220,6 +223,32 @@ io.on("connection", (socket) => {
     // Updates the list
     updateUserList({ socket, rooms, room });
   });
+
+  socket.on('join home', (callback) => {
+    socket.join(home)
+    let returnRoom = {}
+    for (let id in rooms){
+      console.log(id)
+      returnRoom[id] = rooms[id].name
+      console.log(returnRoom)
+    }
+    callback(returnRoom);
+  })
+  
+  socket.on("new room", (name, type, callback) => {
+    let id: any
+    var roomID = randomToken(5);
+    rooms = makeRoom({ RoomName: name, rooms, type, roomID })
+    console.log(rooms)
+    let returnRoom = {}
+    for (let room in rooms){
+      returnRoom[room] = rooms[room].name
+    }
+    socket.to(home).emit("room update", returnRoom)
+    socket.emit("room update", returnRoom)
+    callback(roomID)
+  })
+
 });
 
 function getUsersRooms(socket, rooms) {
