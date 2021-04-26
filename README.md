@@ -93,7 +93,7 @@ In both [lunch](lunch) and [breakfast](breakfast) type the following in the cons
 
 ##### Note:
 
-- You may need to remove `"noEmit": true` from `tsconfig.json` in the [breakfast](breakfast)
+- You may need to remove `"noEmit": true` from `tsconfig.json` in the [breakfast](breakfast) ***Every time you make changes***
 
 ```console
 $ tsc
