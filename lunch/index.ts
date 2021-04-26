@@ -3,6 +3,13 @@ const express = require("express");
 const socketio = require("socket.io");
 const http = require("http");
 //const cors = require('cors')
+// Sets up the db
+const mongoose = require("mongoose")
+require('dotenv').config()
+
+const Users = require('./models/users')
+
+let url = process.env.URL
 
 // All utils
 const { addUser, removeUser, makeRoom } = require("./utils/users");
@@ -34,8 +41,16 @@ const io = socketio(server);
 app.use(router);
 //app.use(cors());
 
-//Setsupt the port
-server.listen(PORT, () => console.log(`Server has started on port ${PORT}`));
+mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log("Connected to db")
+        //Setsupt the port
+        server.listen(PORT, () => console.log(`Server has started on port ${PORT}`));
+
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 
 //Give the message a ID
 function checkMessageId(room) {
