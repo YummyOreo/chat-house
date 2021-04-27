@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import queryString from 'query-string';
 import io from 'socket.io-client';
+import Cookies from 'universal-cookie';
 
 import NavBar from './navBar/NavBar'
 import Input from './input/input'
@@ -19,6 +20,12 @@ var connectionOptions: any =  {
 };
 
 const Chat = ({ location }: {location:any}) => {
+
+	const cookies = new Cookies();
+
+	if (cookies.get("token") == undefined) {
+		window.location.hash = '/login'
+	}
 
 	function promptNameFunc(socket: any, room: any) {
 		console.log(socket)

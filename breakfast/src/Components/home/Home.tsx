@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client';
+import Cookies from 'universal-cookie';
 
 import "../main.css";
 
@@ -17,17 +18,22 @@ var connectionOptions: any =  {
 let socket: any;
 
 const Home = ({ location }: any) => {
+	const cookies = new Cookies();
+
+	if (cookies.get("token") == undefined) {
+		window.location.hash = '/login'
+	}
+	
 	// {id: name}
 	const [rooms, setRooms] = useState({test: "test"});
 	const ENDPOINT = 'localhost:5000';
-
+	console.log()
 	useEffect(() => {
 		socket = io(ENDPOINT, connectionOptions);
 		socket.emit('join home', ( returnRoom: any) => {
 			setRooms(returnRoom)
 		})
 	}, [ENDPOINT, location.search])
-
 	useEffect(() => {
 		socket.on('room update', (returnRoom: any) => {
 			console.log(returnRoom)

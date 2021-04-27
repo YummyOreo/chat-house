@@ -7,13 +7,14 @@ const http = require("http");
 const mongoose = require("mongoose")
 require('dotenv').config()
 
-const Users = require('./models/users')
+const Users = require('./models/user')
 
 let url = process.env.URL
 
 // All utils
 const { addUser, removeUser, makeRoom } = require("./utils/users");
 const { updateUserList } = require("./utils/utils");
+
 let rooms = {
   test: {
     name: "test",
@@ -264,7 +265,40 @@ io.on("connection", (socket) => {
     callback(roomID)
   })
 
+
+
+  socket.on("Make Account", (name, email, callback) => {
+    const id = makeID()
+
+    const user = new Users({
+        id: id,
+        email: email,
+        name: name,
+        rooms: [],
+        owned: [],
+        banned: []
+    });
+    user.save()
+      .then((result) => {
+        console.log(result)
+        let token = result._id
+        let id = result.id
+        console.log(token)
+        callback(token)
+      })
+  })
+
 });
+
+function makeID() {
+  const id = Math.floor((Math.random() * 10000000000) + 1);
+  Users.find({id: id}, function (err, docs) {
+    if (docs.length){
+      makeID()
+    }
+  })
+  return id
+}
 
 function getUsersRooms(socket, rooms) {
   // Loops all the rooms and checks if the user is there
