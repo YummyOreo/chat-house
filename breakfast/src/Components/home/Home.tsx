@@ -24,6 +24,8 @@ const Home = ({ location }: any) => {
 		window.location.hash = '/login'
 	}
 	
+	const [token] = useState(cookies.get("token"))
+
 	// {id: name}
 	const [rooms, setRooms] = useState({test: "test"});
 	const ENDPOINT = 'localhost:5000';

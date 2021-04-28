@@ -22,7 +22,9 @@ const MakeRoom = ({ location}: any) => {
 
 	if (cookies.get("token") == undefined) {
 		window.location.hash = '/login'
-	}	
+	}
+
+	const [token] = useState(cookies.get("token"))
 
 	const [roomName, setRoomName] = useState('');
 	const ENDPOINT = 'localhost:5000';
@@ -49,7 +51,7 @@ const MakeRoom = ({ location}: any) => {
 					<button 
 					onClick={(event) => {
 						event.preventDefault()
-						socket.emit('new room', roomName, 'chat', (id: any) => {
+						socket.emit('new room', roomName, 'chat', token, (id: any) => {
 							window.location.href = `/chat?id=${id}`;
 						})
 					}}>

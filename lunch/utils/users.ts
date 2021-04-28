@@ -10,15 +10,10 @@ userName: the name of the user
 roomID: the id of the room
 rooms: all the rooms
 */
-const addUser = ({ userID, userName, roomID, rooms }) => {
+const addUser = ({ userID, userName, roomID, rooms, token }) => {
   // If the name is null, undefined, or '' it sets it to Guest
   console.log(rooms)
   console.log(roomID)
-  if (rooms[roomID].owner == "") {
-    rooms[roomID].owner = userID;
-  }
-  if (userName == null || userName == undefined || userName == "")
-    userName = "Guest";
   /*
 	userName = userName.trim()
 	roomID = roomID.trim()
@@ -26,8 +21,8 @@ const addUser = ({ userID, userName, roomID, rooms }) => {
 
   //rooms[id] = { name: { RoomName }, users: { userID: userName }, names: { userName: userID }, owner: owner };
   // Adds to the user list
-  rooms[roomID].users[userID] = userName;
-  rooms[roomID].names[userName] = userID;
+  rooms[roomID].users[userID] = token;
+  rooms[roomID].token[token] = userID;
   return rooms;
 };
 // removes a user for the room
@@ -37,13 +32,13 @@ userName: the name of the user
 roomID: the id of the room
 rooms: all the rooms
 */
-const removeUser = ({ userID, userName, roomID, rooms }) => {
+const removeUser = ({ userID, userName, roomID, rooms, token }) => {
   // deletes the user from the room
   delete rooms[roomID].users[userID];
-  delete rooms[roomID].names[userName];
+  delete rooms[roomID].token[token];
 
   // If its the owner delets the owner
-  if (userID == rooms[roomID].owner) {
+  if (token == rooms[roomID].owner) {
     rooms[roomID].owner = "";
   }
   return rooms;
@@ -62,14 +57,15 @@ const makeRoom = ({
   RoomName,
   rooms,
   type,
-  roomID
+  roomID,
+  token
 }) => {
   // Makes it
   rooms[roomID] = {
     name: RoomName,
     users: {},
-    names: {},
-    owner: "",
+    token: {},
+    owner: token,
     messages: [1],
     type: type,
   };

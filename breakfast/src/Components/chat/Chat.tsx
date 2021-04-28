@@ -27,20 +27,7 @@ const Chat = ({ location }: {location:any}) => {
 		window.location.hash = '/login'
 	}
 
-	function promptNameFunc(socket: any, room: any) {
-		console.log(socket)
-		let tryName = prompt('Whats your name');		
-		socket.emit('check name', tryName, room, (result: any) => {
-			if (result == true){
-				promptNameFunc(socket, room)
-			} else {
-				console.log(tryName)
-				return tryName
-			}
-		})
-		return tryName
-
-	}
+	const [token] = useState(cookies.get("token"))
 
 	let [name, setName] = useState('');
 	let [room, setRoom] = useState('');
@@ -54,10 +41,7 @@ const Chat = ({ location }: {location:any}) => {
 
 	let [roomName, setRoomName] = useState('');
 
-	let [newName, setNewName] = useState('');
-
 	let [owner, setOwner] = useState(false);
-	let [ownerID, setOwnerID] = useState('');
 
 	let [type, setType] = useState('');
 
@@ -68,23 +52,17 @@ const Chat = ({ location }: {location:any}) => {
 
 		socket = io(ENDPOINT, connectionOptions);
 		setTimeout(() => { 
-			let promptName: string | null;
-			promptName = promptNameFunc(socket, id);
-			if (promptName == null) promptName = 'Guest'
-			console.log(promptName)
-
-			setName(promptName);
 
 			setRoom(id);
 			console.log(id + " " + room)
-			socket.emit('join', { name: promptName, id }, ({ roomname, ownerID, owner, type }: any) => {
+			socket.emit('join', { token, id }, ({ roomname, owner, type, name }: any) => {
 				setRoomName(roomname);
+				setName(name)
 				setType(type)
 				console.log(users)
 				console.log(owner)
 				if (owner == true){
 					setOwner(true)
-					setOwnerID(ownerID)
 				}
 			});
 			console.log(roomName)
@@ -112,8 +90,8 @@ const Chat = ({ location }: {location:any}) => {
 
 	useEffect(() => {
 		//all messages
-		socket.on('message', ({ nameSend, sendMessage, id }: {nameSend:any, sendMessage:any, id:any}) => {
-			//console.log(name)
+		socket.on('message', (nameSend: any, sendMessage: any, id: any ) => {
+			console.log(nameSend)
 			//messages[id] = {name, message: sendMessage};
 			let idValue = id
 			let mention = false
@@ -138,30 +116,15 @@ const Chat = ({ location }: {location:any}) => {
 		event.preventDefault();
 
 		if(message) {
-			socket.emit('send message', name, room, message, ownerID);
+			socket.emit('send message', name, room, message);
 		}
 
-	}
-
-	const changeName = () => {
-		console.log(socket)
-		let testName: any = prompt('Whats your name');	
-		if (testName == null || testName == ''){
-			changeName()
-		}
-
-		if (users.includes(testName) && testName != null){
-			changeName()
-		} else {
-			setNewName(testName)
-			changeNameEmit(testName)
-		}
 	}
 
 	return (
 		<div>
 		<div style={{"zIndex": 10}}>
-			<NavBar roomName={roomName} changeName={changeName}/>
+			<NavBar roomName={roomName}/>
 		</div>	
 				<br/>
 				<br/>
