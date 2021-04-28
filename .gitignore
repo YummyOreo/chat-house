@@ -17,3 +17,11 @@ typings/
 
 .env
 /.env
+
+# Server temp files / debug files
+.dump
+.save
+.debug
+/.dump
+/.save
+/.debug
