@@ -23,6 +23,7 @@ const addUser = ({ userID, userName, roomID, rooms, token }) => {
   // Adds to the user list
   rooms[roomID].users[userID] = token;
   rooms[roomID].token[token] = userID;
+  rooms[roomID].names[userID] = userName;
   return rooms;
 };
 // removes a user for the room
@@ -36,6 +37,7 @@ const removeUser = ({ userID, userName, roomID, rooms, token }) => {
   // deletes the user from the room
   delete rooms[roomID].users[userID];
   delete rooms[roomID].token[token];
+  delete rooms[roomID].names[userID];
 
   // If its the owner delets the owner
   if (token == rooms[roomID].owner) {
@@ -65,6 +67,7 @@ const makeRoom = ({
     name: RoomName,
     users: {},
     token: {},
+    names: {},
     owner: token,
     messages: [1],
     type: type,

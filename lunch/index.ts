@@ -1,4 +1,4 @@
-var randomToken = require('random-token').create('abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ');
+var randomToken = require('random-token').create('abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ-');
 const express = require("express");
 const socketio = require("socket.io");
 const http = require("http");
@@ -16,14 +16,6 @@ const { addUser, removeUser, makeRoom } = require("./utils/users");
 const { updateUserList } = require("./utils/utils");
 
 let rooms = {
-  test: {
-    name: "test",
-    users: {},
-    token: {},
-    owner: "",
-    messages: [1],
-    type: "announcement",
-  },
 };
 
 const home = 'home'
@@ -192,7 +184,7 @@ io.on("connection", (socket) => {
   
   socket.on("new room", (name, type, token, callback) => {
     let id: any
-    var roomID = randomToken(5);
+    var roomID = randomToken(35);
     rooms = makeRoom({ RoomName: name, rooms, type, roomID, token })
     console.log(rooms)
     let returnRoom = {}

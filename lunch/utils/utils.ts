@@ -8,19 +8,9 @@ const updateUserList = ({socket, rooms, room, Users}) => {
 	// Makes a list
 	let userList = [];
 	// loops all the users and adds it to the list
-	for (let user in rooms[room].users){
-		console.log(user)
-		console.log(rooms[room].users)
-		Users.findById(rooms[room].users[user], function (err, docs) {
-			if (err){
-				console.log(err);
-			}
-			else{
-				console.log(docs)
-				const name = docs.name
-				userList.push(name)
-			}
-		})
+	for (let user in rooms[room].names){
+		userList.push(rooms[room].names[user])
+
 	}
 	// Emits the list
 	console.log(userList)
