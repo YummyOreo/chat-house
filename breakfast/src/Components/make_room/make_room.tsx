@@ -21,7 +21,7 @@ const MakeRoom = ({ location}: any) => {
 	const cookies = new Cookies();
 
 	if (cookies.get("token") == undefined) {
-		window.location.hash = '/login'
+		window.location.href = '/login'
 	}
 
 	const [token] = useState(cookies.get("token"))
