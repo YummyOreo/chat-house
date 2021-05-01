@@ -15,6 +15,7 @@
 First you need to make a github Oauth app [See here](https://docs.github.com/en/developers/apps/authorizing-oauth-apps)
 
 These fields should be filled out like this:
+
 ![Example](https://cdn.discordapp.com/attachments/838071390175232050/838071399808630794/unknown.png)
 
 ### Fill in .env
@@ -48,7 +49,6 @@ This is the client folder for the chat app. It sends all requests to the server.
 | :---------------------: |
 | [Socket.io](#socketio) |
 | [react](#react) |
-| http |
 
 ### Socket.io 
 
