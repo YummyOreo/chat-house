@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client';
-import Cookies from 'universal-cookie';
 
 import "../main.css";
 
@@ -17,14 +16,12 @@ var connectionOptions: any =  {
 let socket: any;
 
 const MakeRoom = ({ location}: any) => {
-	
-	const cookies = new Cookies();
 
-	if (cookies.get("token") == undefined) {
+	if (localStorage.getItem('token') == undefined) {
 		window.location.href = '/login'
 	}
 
-	const [token] = useState(cookies.get("token"))
+	const [token] = useState(localStorage.getItem('token'))
 
 	const [roomName, setRoomName] = useState('');
 	const ENDPOINT = 'localhost:5000';

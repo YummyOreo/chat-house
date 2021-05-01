@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client';
-import Cookies from 'universal-cookie';
 import queryString from 'query-string';
 
 import "../main.css";
@@ -21,16 +20,14 @@ const CallbackLogin = ({ location }: any) => {
 	
 	const { code }: any = queryString.parse(location.search);
 
-	const cookies = new Cookies();
-
-
 	console.log()
 	useEffect(() => {
 		socket = io(ENDPOINT, connectionOptions);
 		
 		socket.emit('Make Account', code, (token: any, id: any) => {
-			cookies.set('token', token, { path: '/' });
-			cookies.set('id', id, { path: '/' });
+			localStorage.setItem('token', token);
+			localStorage.setItem('id', id);
+
 		})
 
 	}, [ENDPOINT, location.search])
