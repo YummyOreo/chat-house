@@ -21,7 +21,7 @@ const Home = ({ location }: any) => {
 	const cookies = new Cookies();
 
 	if (cookies.get("token") == undefined) {
-		window.location.href = '/login'
+		window.location.href = 'login'
 	}
 	
 	const [token] = useState(cookies.get("token"))

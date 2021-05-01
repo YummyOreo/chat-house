@@ -10,7 +10,7 @@ userName: the name of the user
 roomID: the id of the room
 rooms: all the rooms
 */
-const addUser = ({ userID, userName, roomID, rooms, token }) => {
+let addUser = ({ userID, userName, roomID, rooms, token }) => {
   // If the name is null, undefined, or '' it sets it to Guest
   console.log(rooms)
   console.log(roomID)
@@ -33,7 +33,7 @@ userName: the name of the user
 roomID: the id of the room
 rooms: all the rooms
 */
-const removeUser = ({ userID, userName, roomID, rooms, token }) => {
+let removeUser = ({ userID, userName, roomID, rooms, token }) => {
   // deletes the user from the room
   delete rooms[roomID].users[userID];
   delete rooms[roomID].token[token];
@@ -55,7 +55,7 @@ userID: the id of the user
 rooms: all the rooms
 */
 // Needs editing when making the home page
-const makeRoom = ({
+let makeRoom = ({
   RoomName,
   rooms,
   type,

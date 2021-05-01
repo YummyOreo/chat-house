@@ -8,9 +8,9 @@
 
 | Codebase               |                   Description                    |
 | :--------------------- | :----------------------------------------------: |
-| [Breakfast](breakfast) | The sorce code for the client side (TS/React) |
-| [Lunch](lunch)         |      The sorce code for the server (TS)       |
-| [Dinner](dinner)       |             The sorce code for the API (PY/Flask)             |
+| [Breakfast](breakfast/README.md) | The sorce code for the client side (TS/React) |
+| [Lunch](lunch/README.md)         |      The sorce code for the server (TS)       |
+| [Dinner](dinner/README.md)       |             The sorce code for the API (PY/Flask)             |
 | [Brunch](#structure)   |              Coming Soon (Docs/md)               |
 
 ## Branches
@@ -81,6 +81,8 @@ Go [here https://nodejs.org/en/](https://nodejs.org/en/)
 
 ### Install all npm packages
 
+**NOTE** YOU SHOULD FIRST READ THE README.md in both the [lunch](lunch) and [breakfast](breakfast) folders
+
 In both [lunch](lunch) and [breakfast](breakfast) type the following in the console:
 
 ```console
@@ -89,11 +91,7 @@ $ npm i
 
 ### Convert TS to JS
 
-In both [lunch](lunch) and [breakfast](breakfast) type the following in the console:
-
-##### Note:
-
-- You may need to remove `"noEmit": true` from `tsconfig.json` in the [breakfast](breakfast)
+In [lunch](lunch) type the following in the console:
 
 ```console
 $ tsc

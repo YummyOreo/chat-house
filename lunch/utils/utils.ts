@@ -4,7 +4,7 @@ socket: the socket of the user
 rooms: all the rooms
 room: the room id of the room -_-
 */
-const updateUserList = ({socket, rooms, room, Users}) => {
+let updateUserList = ({socket, rooms, room, Users}) => {
 	// Makes a list
 	let userList = [];
 	// loops all the users and adds it to the list

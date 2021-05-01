@@ -1,4 +1,4 @@
-<h1 align="center">Lunch (AKA Server)</h1>
+<h1 align="center">Breakfast (AKA Client)</h1>
 
 ---
 
@@ -6,14 +6,12 @@
 
 | Codebase/Folder               |                   Description                    |
 | :--------------------- | :----------------------------------------------: |
-| [index](indtx.ts) | The main file for the server (TS). This is ran when you run the server |
-| [utils](utils) | The main folder for the server, houses the utils or [users](https://github.com/OreoDivision/chat-house/blob/master/lunch/utils/users.ts) and [utils](https://github.com/OreoDivision/chat-house/blob/master/lunch/utils/utils.ts) files |
-| [router](router) | The folder for the router/showing the server is runing | 
+| [src](src) | The react sorce code for reat (TS/React). |
 
 ## How to Run
 
 ### Make Oauth App
-
+** You dont have to do this ijf you did it in the server side app**
 First you need to make a github Oauth app [See here](https://docs.github.com/en/developers/apps/authorizing-oauth-apps)
 
 These fields should be filled out like this:
@@ -25,9 +23,7 @@ Now rename the .env.example to .env and fill out the feelds
 
 Example:
 ```
-URL=Your Mongo DB URL
 ID=Your Client ID (Github)
-SECRET=Your Client SECRET (Github) 
 ```
 
 ### Install all node moduales (Only one time, do it when you pull too)
@@ -37,14 +33,7 @@ Type the following into the command line:
 $ npm i
 ``` 
 
-### Make js files
-
-Type the following into the command line:
-```console
-$ tsc
-``` 
-
-### Run the server
+### Run the client side dev server
 
 Type the following into the command line:
 ```console
@@ -53,12 +42,12 @@ $ npm start
 
 ## About
 
-This is the server folder for the chat app. It gest all requests from the client side.
+This is the client folder for the chat app. It sends all requests to the server.
 
 | Modules Used |
 | :---------------------: |
 | [Socket.io](#socketio) |
-| [express](#express) |
+| [react](#react) |
 | http |
 
 ### Socket.io 
@@ -67,8 +56,8 @@ This is the server folder for the chat app. It gest all requests from the client
 
 This is a module to send and receve request faster than HTTP requests
 
-### Express
+### React
 
-> [https://expressjs.com/](https://expressjs.com/)
+> [https://expressjs.com/](https://reactjs.org/)
 
-This module helps make a server on a port.
+This helps make a website!

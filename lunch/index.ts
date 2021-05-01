@@ -1,38 +1,38 @@
 var randomToken = require('random-token').create('abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ-');
-const express = require("express");
-const socketio = require("socket.io");
-const http = require("http");
-const superagent = require('superagent');
+let express = require("express");
+let socketio = require("socket.io");
+let http = require("http");
+let superagent = require('superagent');
 var github = require('octonode');
-//const cors = require('cors')
+//let cors = require('cors')
 // Sets up the db
-const mongoose = require("mongoose")
+let mongoose = require("mongoose")
 require('dotenv').config()
 
-const Users = require('./models/user')
+let Users = require('./models/user')
 
 let url = process.env.URL
 let ID = process.env.ID
 let SECRET = process.env.SECRET
 
 // All utils
-const { addUser, removeUser, makeRoom } = require("./utils/users");
-const { updateUserList } = require("./utils/utils");
+let { addUser, removeUser, makeRoom } = require("./utils/users");
+let { updateUserList } = require("./utils/utils");
 
 let rooms = {
 };
 
-const home = 'home'
+let home = 'home'
 
-const PORT = process.env.PORT || 5000;
+let PORT = process.env.PORT || 5000;
 
 //setupts the router
-const router = require("./router/router");
+let router = require("./router/router");
 
 //Setups the server
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
+let app = express();
+let server = http.createServer(app);
+let io = socketio(server);
 
 app.use(router);
 //app.use(cors());
@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
 		  console.log(err);
 	  }
 	  else{
-		const name = docs.name
+		let name = docs.name
 		rooms = addUser({ userID: socket.id, userName: name, roomID: room, rooms, token });
 		/*
 		console.log(rooms[room].name)
@@ -132,7 +132,7 @@ io.on("connection", (socket) => {
 	*/
   socket.on("send message", (name, room, message) => {
 	if (message.startsWith("!")) {
-	  const [command, ...args] = message
+	  let [command, ...args] = message
 		.trim()
 		.substring("!".length)
 		.split(/\s+/);
@@ -213,7 +213,7 @@ io.on("connection", (socket) => {
 	  })
 	  .set('Accept', 'application/json')
 	  .end((err, data) => {
-		const newData = data.body;
+		let newData = data.body;
 		console.log(newData)
 		var client = github.client(newData.access_token);
 
@@ -224,7 +224,7 @@ io.on("connection", (socket) => {
 				if (docs.length){
 				  callback(docs.__id, docs.id)
 				} else {
-					const user = new Users({
+					let user = new Users({
 						id: body.id,
 						githubToken: newData.access_token,
 						name: body.login,
