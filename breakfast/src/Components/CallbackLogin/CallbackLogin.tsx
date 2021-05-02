@@ -27,7 +27,7 @@ const CallbackLogin = ({ location }: any) => {
 		socket.emit('Make Account', code, (token: any, id: any) => {
 			localStorage.setItem('token', token);
 			localStorage.setItem('id', id);
-
+			window.location.href = '/'
 		})
 
 	}, [ENDPOINT, location.search])

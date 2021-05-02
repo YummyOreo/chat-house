@@ -10,6 +10,11 @@
 
 ## How to Run
 
+** TO RUN YOU MAY HAVE TO DO THE FOLLOWING:**
+- First go to `tsconfig.json` and remove `"noEmit": true`
+- Run `$ tsc` in the console
+- Run the dev server `$ npm start` 
+
 ### Make Oauth App
 ** You dont have to do this ijf you did it in the server side app**
 First you need to make a github Oauth app [See here](https://docs.github.com/en/developers/apps/authorizing-oauth-apps)
@@ -18,9 +23,8 @@ These fields should be filled out like this:
 
 ![Example](https://cdn.discordapp.com/attachments/838071390175232050/838071399808630794/unknown.png)
 
-### Fill in .env
-
-Now rename the .env.example to .env and fill out the feelds
+### Fill in id
+Go to ./Components/login/login.tsx and fill in the Client ID on line 14
 
 Example:
 ```

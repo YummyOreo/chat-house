@@ -17,7 +17,7 @@ let socket: any;
 
 const MakeRoom = ({ location}: any) => {
 
-	if (localStorage.getItem('token') == undefined) {
+	if (localStorage.getItem('token') == null) {
 		window.location.href = '/login'
 	}
 

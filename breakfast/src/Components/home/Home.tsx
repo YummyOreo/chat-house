@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client';
+import { useToasts } from 'react-toast-notifications'
 
 import "../main.css";
 
@@ -17,11 +18,20 @@ var connectionOptions: any =  {
 let socket: any;
 
 const Home = ({ location }: any) => {
+	const { addToast } = useToasts()
 
-	if (localStorage.getItem('token') == undefined) {
+	/* 
+		addToast("TEXT", {
+			appearance: 'success',
+			autoDismiss: true,
+			PlacementType: "bottom-right"
+		})
+	*/
+
+	if (localStorage.getItem('token') == null) {
 		window.location.href = 'login'
 	}
-	
+
 	const [token] = useState(localStorage.getItem('token'))
 
 	// {id: name}
@@ -29,6 +39,7 @@ const Home = ({ location }: any) => {
 	const ENDPOINT = 'localhost:5000';
 	console.log()
 	useEffect(() => {
+
 		socket = io(ENDPOINT, connectionOptions);
 		socket.emit('join home', ( returnRoom: any) => {
 			setRooms(returnRoom)
