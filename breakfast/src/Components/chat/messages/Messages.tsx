@@ -2,7 +2,7 @@ import React from 'react';
 
 //import ScrollToBottom from "react-scroll-to-bottom"
 
-import Message from "./message/message.js"
+import Message from "./message/message"
 
 import "../../main.css";
 import "./noScrollBar.css";

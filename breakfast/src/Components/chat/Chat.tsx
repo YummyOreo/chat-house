@@ -142,21 +142,25 @@ const Chat = ({ location }: {location:any}) => {
 				<br/>
 				<div>
 				</div>
-			<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '#292929', height: 'max', minHeight: "95vh"}}>
+			<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '	#505050', height: 'max', minHeight: "95vh"}}>
 				<div className='container' style={{marginTop: 0}}>
-				<div>
+				<br></br>
+				<br></br>
+				<div style={{ backgroundColor: "#404040", borderRadius: "5%"}}>
 					<br/>
-					<div style={{width: "10px"}}>
+					<div style={{width: "10px", marginLeft: "1rem"}}>
 						<Messages messages={messages} />
 					</div>
 					<br/>
 					<br/>
+					<div style={{marginLeft: "1rem", marginRight: "1rem"}}>
 						<Input message={message} setMessage={setMessage} sendMessage={sendMessage} type={type} owner={owner}/>
+					</div>
 					<br/>
 				</div>
 
 				</div>
-				<div style={{backgroundColor: "gray", width: 'max', height: 'max', minHeight: "95vh", color: "white"}}>
+				<div style={{backgroundColor: "#606060", width: 'max', height: 'max', minHeight: "95vh", color: "white"}}>
 					<UserBar users={users}/>
 				</div>
 			</div>
