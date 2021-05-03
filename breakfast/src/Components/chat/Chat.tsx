@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import queryString from 'query-string';
 import io from 'socket.io-client';
+import { useToasts } from 'react-toast-notifications'
 
 import NavBar from './navBar/NavBar'
 import Input from './input/input'
@@ -24,6 +25,7 @@ const Chat = ({ location }: {location:any}) => {
 		window.location.href = '/login'
 	}
 
+	const { addToast } = useToasts()
 	const [token] = useState(localStorage.getItem('token'))
 
 	let [name, setName] = useState('');
@@ -76,12 +78,25 @@ const Chat = ({ location }: {location:any}) => {
 	}, [ENDPOINT, location.search]);
 
 	useEffect(() => {
+		socket.on("toast", (content: any, type: any) => {
+			addToast(content, {
+				appearance: type,
+				autoDismiss: true,
+				PlacementType: "bottom-right"
+			})
+		})
+	}, [ addToast ])
+
+	useEffect(() => {
 		socket.on('kicked', (id: any) => {
 			console.log('Kicked')
-			console.log(socket.id)
-			//socket.emit("disconnect", room);
-			//socket.off();
-			window.location.href = '/'
+			console.log(localStorage.getItem('token'))
+			if (id == localStorage.getItem('token')){
+				socket.emit("disconnect", room);
+				socket.off();
+				window.location.href = '/'
+			}
+			
 		})
 	})
 

@@ -10,10 +10,10 @@ import CallbackLogin from "./Components/CallbackLogin/CallbackLogin";
 
 const App = () => (
 	<ToastProvider
-    autoDismiss
-    autoDismissTimeout={6000}
-    placement="bottom-right"
-  >
+	autoDismiss
+	autoDismissTimeout={10000}
+	placement="bottom-right"
+	>
 		<BrowserRouter>
 			<Route path="/" exact component={Home} /> 
 			<Route path="/chat" component={Chat} />

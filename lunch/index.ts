@@ -67,6 +67,7 @@ io.on("connection", (socket) => {
 	// Adds the user to to room
 	Users.findById(token, function (err, docs) {
 	  if (err){
+		  console.log("err");
 		  console.log(err);
 	  }
 	  else{
@@ -161,7 +162,7 @@ io.on("connection", (socket) => {
 	rooms[room].messages.push(id);
 	socket.to(rooms[room]).emit("message", 
 	  "System",
-	  `@${rooms[room].users[socket.id]} has left.`,
+	  `@${rooms[room].names[socket.id]} has left.`,
 	  id,
 	);
 	// Removes the user
@@ -222,7 +223,9 @@ io.on("connection", (socket) => {
 
 			Users.find({id: body.id}, function (err, docs) {
 				if (docs.length){
-				  callback(docs.__id, docs.id)
+					console.log(docs[0])
+					console.log(docs[0]._id, docs[0].id)
+				  	callback(docs[0]._id, docs[0].id)
 				} else {
 					let user = new Users({
 						id: body.id,

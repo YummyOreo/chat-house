@@ -1,8 +1,13 @@
 import React from 'react';
-
+import Popup from 'reactjs-popup';
 import "../../../main.css";
 
+import "./popup.css"
+
 function emoji(message: any){
+	message = message.replace('\:', ":")
+	message = message.replace('\;', ";")
+	message = message.replace('\|', "|")
 	message = message.replace(':)', "🙂")
 	message = message.replace(';)', "😉")
 	message = message.replace(':o', "😮")
@@ -12,9 +17,6 @@ function emoji(message: any){
 	message = message.replace(':P', "😛")
 	message = message.replace(';p', "😜")
 	message = message.replace(';P', "😜")
-	message = message.replace('\:', ":")
-	message = message.replace('\;', ";")
-	message = message.replace('\|', "|")
 	return message
 }
 
@@ -24,12 +26,11 @@ const Message = ({ message }: {message:any}) => {
 		return (
 
 			<div style={{color: "white", backgroundColor: "", borderRadius: "10px", marginRight: "min", height: "content"}}>
-				<p style={{marginLeft: "10px"}}>
-				{message.name}
-				</p>
-				<p style={{marginLeft: "10px"}}>
-				{message.message}
-				</p>
+				<div style={{marginLeft: "10px"}}>
+				<Popup trigger={<button className="button">{message.name}</button>} modal>
+   					<span> Modal content </span>
+ 				</Popup>: {message.message}
+				</div>
 			</div>
 			
 		)

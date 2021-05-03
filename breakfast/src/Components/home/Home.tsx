@@ -20,12 +20,20 @@ let socket: any;
 const Home = ({ location }: any) => {
 	const { addToast } = useToasts()
 
-	/* 
-		addToast("TEXT", {
-			appearance: 'success',
-			autoDismiss: true,
-			PlacementType: "bottom-right"
-		})
+	/* import { useToasts } from 'react-toast-notifications'
+	
+		const { addToast } = useToasts()
+		
+		useEffect(() => {
+			socket.on("toast", (content: any, type: any) => {
+				addToast(content, {
+					appearance: type,
+					autoDismiss: true,
+					PlacementType: "bottom-right"
+				})
+			})
+		}, [ addToast ])
+		
 	*/
 
 	if (localStorage.getItem('token') == null) {
@@ -52,13 +60,24 @@ const Home = ({ location }: any) => {
 		})
 	}, [rooms])
 
+	useEffect(() => {
+		socket.on("toast", (content: string, type: any) => {
+			addToast(content, {
+				appearance: type,
+				autoDismiss: true,
+				PlacementType: "bottom-right"
+			})
+		})
+	}, [ addToast ])
+
 	return (
 		<div>
 			<div>
-				<Navbar/>
+				<Navbar />
 			</div>
 			<div>
 				</div>
+					<br/>
 					<div style={{ backgroundColor: "gray" }}>
 						<h1>
 						Rooms

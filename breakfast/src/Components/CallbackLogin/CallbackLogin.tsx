@@ -25,6 +25,7 @@ const CallbackLogin = ({ location }: any) => {
 		socket = io(ENDPOINT, connectionOptions);
 		
 		socket.emit('Make Account', code, (token: any, id: any) => {
+			console.log(token)
 			localStorage.setItem('token', token);
 			localStorage.setItem('id', id);
 			window.location.href = '/'
