@@ -4,7 +4,10 @@ import "./popupCss.css"
 const PopUp = (props: any) => {
 	if (props.trigger == true){
 		return  (
-			<div className={"popup"}>
+			<div className={"popup"} >
+
+				<div className={"popup-noShow"}  onClick={() => {props.setTrigger(false)}}></div>
+				
 				<div className="popup-inner" style={{marginLeft: "1rem"}}>
 					<button className="waves-effect waves-light btn" id="btn" 
 					onClick={() => {props.setTrigger(false)}}
