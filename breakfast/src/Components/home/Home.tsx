@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import io from 'socket.io-client';
 import { useToasts } from 'react-toast-notifications'
 import queryString from 'query-string';
+import { Helmet } from 'react-helmet'
 
 import "../main.css";
 
@@ -68,6 +69,10 @@ const Home = ({ location }: any) => {
 
 	return (
 		<div>
+			<Helmet>
+				<title>Home | Chat House</title>
+				<meta name="Chat House" content="Chat House, is a app for creators. You can make different types of rooms for different purposes!" />
+			</Helmet>
 			<div>
 				<Navbar />
 			</div>

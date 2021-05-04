@@ -1,8 +1,20 @@
 {
   "name": "chat-house",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "repository": "https://github.com/OreoDivision/chat-house.git",
+  "dependencies": {
+    "commitizen": "^4.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "commit": "cz"
+  },
+  "repository": "git+https://github.com/OreoDivision/chat-house.git",
   "author": "OreoDivision <Bobgim20@gmail.com>",
-  "license": "MIT"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OreoDivision/chat-house/issues"
+  },
+  "homepage": "https://github.com/OreoDivision/chat-house#readme"
 }
