@@ -161,7 +161,7 @@ const Chat = ({ location }: {location:any}) => {
 
 				</div>
 				<div style={{backgroundColor: "#606060", width: 'max', height: 'max', minHeight: "95vh", color: "white"}}>
-					<UserBar users={users}/>
+					<UserBar users={users} sokcet={socket} owner={owner} token={token} room={room}/>
 				</div>
 			</div>
 			

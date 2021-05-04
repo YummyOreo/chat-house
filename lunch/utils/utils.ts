@@ -9,6 +9,7 @@ let updateUserList = ({socket, rooms, room, Users}) => {
 	let userList = [];
 	// loops all the users and adds it to the list
 	for (let user in rooms[room].names){
+		let userReturn = {name: rooms[room].names[user], id: rooms[room].id[socket.id]}
 		userList.push(rooms[room].names[user])
 
 	}

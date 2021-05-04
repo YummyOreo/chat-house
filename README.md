@@ -79,30 +79,4 @@ This will download the sorce for the chat app
 To make the server and client work you need nodejs
 Go [here https://nodejs.org/en/](https://nodejs.org/en/)
 
-### Install all npm packages
-
-**NOTE** YOU SHOULD FIRST READ THE README.md in both the [lunch](lunch) and [breakfast](breakfast) folders
-
-In both [lunch](lunch) and [breakfast](breakfast) type the following in the console:
-
-```console
-$ npm i
-```
-
-### Convert TS to JS
-
-In [lunch](lunch) type the following in the console:
-
-```console
-$ tsc
-```
-
-### Run the app:
-
-To run the app you need **2** consoles open in [lunch](lunch) and [breakfast](breakfast), then type:
-
-```console
-$ npm start
-```
-
-In each!
+Now READ THE README.md in both the [lunch](lunch/README.md) and [breakfast](breakfast/README.md) folders

@@ -10,7 +10,7 @@ userName: the name of the user
 roomID: the id of the room
 rooms: all the rooms
 */
-let addUser = ({ userID, userName, roomID, rooms, token }) => {
+let addUser = ({ socketID, userName, roomID, rooms, token, id }) => {
   // If the name is null, undefined, or '' it sets it to Guest
   console.log(rooms)
   console.log(roomID)
@@ -19,11 +19,12 @@ let addUser = ({ userID, userName, roomID, rooms, token }) => {
 	roomID = roomID.trim()
 	*/
 
-  //rooms[id] = { name: { RoomName }, users: { userID: userName }, names: { userName: userID }, owner: owner };
+  //rooms[id] = { name: { RoomName }, users: { socketID: userName }, names: { userName: socketID }, owner: owner };
   // Adds to the user list
-  rooms[roomID].users[userID] = token;
-  rooms[roomID].token[token] = userID;
-  rooms[roomID].names[userID] = userName;
+  rooms[roomID].users[socketID] = token;
+  rooms[roomID].token[token] = socketID;
+  rooms[roomID].names[socketID] = userName;
+  rooms[roomID].id[socketID] = id;
   return rooms;
 };
 // removes a user for the room
@@ -33,11 +34,12 @@ userName: the name of the user
 roomID: the id of the room
 rooms: all the rooms
 */
-let removeUser = ({ userID, userName, roomID, rooms, token }) => {
+let removeUser = ({ socketID, userName, roomID, rooms, token }) => {
   // deletes the user from the room
-  delete rooms[roomID].users[userID];
+  delete rooms[roomID].users[socketID];
   delete rooms[roomID].token[token];
-  delete rooms[roomID].names[userID];
+  delete rooms[roomID].names[socketID];
+  delete rooms[roomID].id[socketID];
 
   // If its the owner delets the owner
   if (token == rooms[roomID].owner) {
@@ -68,6 +70,7 @@ let makeRoom = ({
     users: {},
     token: {},
     names: {},
+    id: {},
     owner: token,
     messages: [1],
     type: type,

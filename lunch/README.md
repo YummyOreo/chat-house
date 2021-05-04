@@ -35,21 +35,21 @@ SECRET=Your Client SECRET (Github)
 
 Type the following into the command line:
 ```console
-$ npm i
+$ yarn install
 ``` 
 
 ### Make js files
 
 Type the following into the command line:
 ```console
-$ tsc
+$ yarn build
 ``` 
 
 ### Run the server
 
 Type the following into the command line:
 ```console
-$ npm start
+$ yarn start
 ``` 
 
 ## About

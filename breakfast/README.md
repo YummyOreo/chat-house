@@ -25,7 +25,7 @@ Go to ./Components/login/login.tsx and fill in the Client ID on line 14
 
 Type the following into the command line:
 ```console
-$ yarn
+$ yarn install
 ``` 
 
 ### Run the client side dev server

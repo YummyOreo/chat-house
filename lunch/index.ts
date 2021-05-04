@@ -72,7 +72,7 @@ io.on("connection", (socket) => {
 	  }
 	  else{
 		let name = docs.name
-		rooms = addUser({ userID: socket.id, userName: name, roomID: room, rooms, token });
+		rooms = addUser({ socketID: socket.id, userName: name, roomID: room, rooms, token, id: docs.id });
 		/*
 		console.log(rooms[room].name)
 	
@@ -132,12 +132,23 @@ io.on("connection", (socket) => {
 	message: the content of the messsage
 	*/
   socket.on("send message", (name, room, message) => {
-	if (message.startsWith("!")) {
-	  let [command, ...args] = message
-		.trim()
-		.substring("!".length)
-		.split(/\s+/);
+	
+	if (message == null || message == '' || message == undefined) {
+		socket.emit("toast", "There was a error sending that message", 'error')
+		return
 	}
+
+	try{
+		if (message.startsWith("!")) {
+		let [command, ...args] = message
+			.trim()
+			.substring("!".length)
+			.split(/\s+/);
+		}
+	} catch {(err: any) => {
+		console.log(err)
+		socket.emit("toast", "There was a error sending that message", 'error')
+	}}
 	// Gets the ID of the message
 	let id = checkMessageId(room);
 
@@ -167,7 +178,7 @@ io.on("connection", (socket) => {
 	);
 	// Removes the user
 	rooms = removeUser({
-	  userID: socket.id,
+	  socketID: socket.id,
 	  userName: rooms[room].users[socket.id],
 	  roomID: room,
 	  rooms,
@@ -175,6 +186,18 @@ io.on("connection", (socket) => {
 	// Updates the list
 	updateUserList({ socket, rooms, room, Users });
   });
+
+  socket.on('kick', (id, token, room) => {
+	if (rooms[room].owner === token) {
+		socket.to(rooms[room]).emit('kicked', id)
+		Users.find({id: id})
+		.then((result) => {
+			console.log(result)
+			socket.emit("toast", `${result.name} has been kicked`, 'success')
+		})
+		.catch(err => socket.emit("toast", "There was a error kicking that user", 'error'))
+	}
+  })
 
   socket.on('join home', (callback) => {
 	socket.join(home)

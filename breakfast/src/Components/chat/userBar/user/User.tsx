@@ -3,17 +3,46 @@ import PopUp from './popup/popup';
 
 import "../../../main.css";
 
-const User = ({user}: any) => {
+const User = ({user, socket, owner, token, room}: any) => {
 	const [ buttonPopup, setButtonPopup ]: any = useState(false)
-	return(
-		<div>
-			<PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
-				<h3> {user} </h3>
-			</PopUp>
-			<p onClick={() => {setButtonPopup(true)}} style={{marginLeft: "1rem"}}>{user}</p>
+	if (owner){
+		return(
+			<div>
+				<PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
+					<div style={{marginLeft: "1rem"}}>
+						
+						<h3> {user.name} </h3>
 
-		</div>
-	)
+						<button className="waves-effect waves-light btn"
+							onClick={() => {
+								socket.emit('kick', user.id, token, room)
+							}}
+							style={{backgroundColor: "#001eff"}}
+						>
+							Kick
+						</button>
+
+					</div>
+				</PopUp>
+				<p onClick={() => {setButtonPopup(true)}} style={{marginLeft: "1rem"}}>{user.name}</p>
+
+			</div>
+		)
+	} else {
+		return(
+			<div>
+				<PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
+					<div style={{marginLeft: "1rem"}}>
+						
+						<h3> {user.name} </h3>
+
+					</div>
+				</PopUp>
+				<p onClick={() => {setButtonPopup(true)}} style={{marginLeft: "1rem"}}>{user.name}</p>
+
+			</div>
+		)
+	}
 }
 
 export default User;
