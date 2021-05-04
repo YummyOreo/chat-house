@@ -19,7 +19,7 @@ These fields should be filled out like this:
 ![Example](https://cdn.discordapp.com/attachments/838071390175232050/838071399808630794/unknown.png)
 
 ### Fill in id
-Rename `env.example` to `env` and put your Client ID in there
+Go to [./src/Components/login/login.tsx](/src/Components/login/login.tsx) and put your Client ID in the var ID (line 20)
 
 ### Install all node moduales (Only one time, do it when you pull too)
 

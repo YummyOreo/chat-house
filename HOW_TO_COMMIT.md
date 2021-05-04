@@ -10,12 +10,12 @@ Commit changed
 ```console
 $ yarn coommit
 ```
-This will prompt you with a commit message:
-- Select the type of change.
-- Type the scope/what you are tring to do
-- Type what files/folders you changed
-- Type what you did
-- y or n for whether there are any breaking changes
-- y or n for whether this change affects an open issue, if positive you will be prompted to enter the issue number.
+- This will prompt you with a commit message:
+	- Select the type of change.
+	- Type the scope/what you are tring to do
+	- Type what files/folders you changed
+	- Type what you did
+	- y or n for whether there are any breaking changes
+	- y or n for whether this change affects an open issue, if positive you will be prompted to enter the issue number.
 
 - Now you have your commit you may now push to your fork
