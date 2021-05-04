@@ -3,7 +3,7 @@ import PopUp from './popup/popup';
 
 import "../../../main.css";
 
-const User = ({user, socket, owner, token, room}: any) => {
+const User = ({user, kick, owner}: any) => {
 	const [ buttonPopup, setButtonPopup ]: any = useState(false)
 	if (owner){
 		return(
@@ -15,7 +15,7 @@ const User = ({user, socket, owner, token, room}: any) => {
 
 						<button className="waves-effect waves-light btn"
 							onClick={() => {
-								socket.emit('kick', user.id, token, room)
+								kick(user.id)
 							}}
 							style={{backgroundColor: "#001eff"}}
 						>

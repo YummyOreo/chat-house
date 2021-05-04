@@ -134,6 +134,10 @@ const Chat = ({ location }: {location:any}) => {
 
 	}
 
+	const kick = (id: any) => {
+		socket.emit("kick", id, token, room)
+	}
+
 	return (
 		<div>
 		<div style={{"zIndex": 10}}>
@@ -143,7 +147,7 @@ const Chat = ({ location }: {location:any}) => {
 				<br/>
 				<div>
 				</div>
-			<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '	#505050', height: 'max', minHeight: "95vh"}}>
+			<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '	#505050', minHeight: "93vh"}}>
 				<div className='container' style={{marginTop: 0}}>
 				<br></br>
 				<br></br>
@@ -161,8 +165,8 @@ const Chat = ({ location }: {location:any}) => {
 				</div>
 
 				</div>
-				<div style={{backgroundColor: "#606060", width: 'max', height: 'max', minHeight: "95vh", color: "white"}}>
-					<UserBar users={users} sokcet={socket} owner={owner} token={token} room={room}/>
+				<div style={{backgroundColor: "#606060", width: 'max', minHeight: "93vh", color: "white"}}>
+					<UserBar users={users} kick={kick} owner={owner}/>
 				</div>
 			</div>
 			

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet'
 import "../main.css";
+import fs from 'fs'
 
 var connectionOptions: any =  {
 	"force new connection" : true,
@@ -16,8 +17,7 @@ const Login = () => {
 	if(localStorage.getItem('token') != null) {
 		window.location.href = '/home'
 	}
-
-	const id = "c2e8e27f6c14e43666a4" // HERE
+	const id = fs.readFileSync("../../../env", {encoding:'utf8', flag:'r'})
     const link = `https://github.com/login/oauth/authorize?client_id=${id}` 
 
 
