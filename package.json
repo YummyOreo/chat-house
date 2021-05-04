@@ -6,7 +6,9 @@
   "dependencies": {
     "commitizen": "^4.2.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cz-conventional-changelog": "3.3.0"
+  },
   "scripts": {
     "commit": "cz"
   },
@@ -16,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/OreoDivision/chat-house/issues"
   },
-  "homepage": "https://github.com/OreoDivision/chat-house#readme"
+  "homepage": "https://github.com/OreoDivision/chat-house#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

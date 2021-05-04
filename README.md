@@ -25,43 +25,22 @@ Only Ones that **Wont** go away (Not temporary)
 
 Chat House, is a app for creators. You can make different types of rooms for different purposes!
 
-## Notable features:
-
-- [ ] Make Rooms
-
-- [x] Room Types
-
 ## How to contribute:
 
-### Here is a list of things to do **before** helping:
-
-- Look at [issuse](https://github.com/OreoDivision/chat-house/issues) to find a issue that you want to work on
-  Or
-- Find something to add to
-
-#### Aslo make shoure what you want to work on is not in [Working On](WORKING_ON.md)
-
-### Then contact **OreoDivision** on discord @ OreoDivision#0001
-
-Go to discord and dm me something like this:
-
+- First find something to work on
+- Next get it working on you pc ([How to run](#how-to-run-the-app)])
+- Next fork the repo and work on your fixes/changes/additions
+- Now Read [How To Commit](HOW_TO_COMMIT.md)
+  - Using `yarn` so have that installed
+- Make a pr with a title and description
+  - To main, from your forked repo
+Title example:
 ```
-**I want to help with your chat app**
-I want to <add/fix>
-<Describe what you want to add>
+{User name} {pr index (number of pr you have done in the repo)}
 ```
-
-### Fork and make what you want:
-
-Make shoure you add comments and only change what you need to
-
-### Make A PR and your done!
-
-Open a pr with a description
 
 ## How to run the app
 
-There are 2 things to run, with the same command.
 
 ### First download the files
 
@@ -74,9 +53,12 @@ This will download the sorce for the chat app
 
 ### To run the api, [go here](https://github.com/OreoDivision/chat-house/blob/master/dinner/README.md)
 
-### Install Node JS
+### Install Node JS && Yarn
 
 To make the server and client work you need nodejs
 Go [here https://nodejs.org/en/](https://nodejs.org/en/)
+
+To have clean commands insall YARN
+[Yarn](https://classic.yarnpkg.com/en/docs/install)
 
 Now READ THE README.md in both the [lunch](lunch/README.md) and [breakfast](breakfast/README.md) folders
