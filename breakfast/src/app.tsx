@@ -16,6 +16,7 @@ const App = () => (
 	>
 		<BrowserRouter>
 			<Route path="/" exact component={Home} /> 
+			<Route path="/home" component={Home} /> 
 			<Route path="/chat" component={Chat} />
 			<Route path="/make" exact component={MakeRoom} />
 			<Route path="/login" exact component={Login} />

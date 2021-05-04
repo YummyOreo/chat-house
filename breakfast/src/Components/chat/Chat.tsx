@@ -55,6 +55,7 @@ const Chat = ({ location }: {location:any}) => {
 			setRoom(id);
 			console.log(id + " " + room)
 			socket.emit('join', { token, id }, ({ roomname, owner, type, name }: any) => {
+				if (roomname == null || roomname == undefined) window.location.href = '/error?code=101'
 				setRoomName(roomname);
 				setName(name)
 				setType(type)
@@ -90,11 +91,11 @@ const Chat = ({ location }: {location:any}) => {
 	useEffect(() => {
 		socket.on('kicked', (id: any) => {
 			console.log('Kicked')
-			console.log(localStorage.getItem('token'))
-			if (id == localStorage.getItem('token')){
+			console.log(localStorage.getItem('id'))
+			if (id == localStorage.getItem('id')){
 				socket.emit("disconnect", room);
 				socket.off();
-				window.location.href = '/'
+				window.location.href = '/home?code=100'
 			}
 			
 		})

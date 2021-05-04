@@ -11,7 +11,7 @@ var connectionOptions: any =  {
 let socket: any;
 
 const Login = () => {
-	const id = "" // HERE
+	const id = "c2e8e27f6c14e43666a4" // HERE
     const link = `https://github.com/login/oauth/authorize?client_id=${id}` 
 
 

@@ -65,6 +65,17 @@ io.on("connection", (socket) => {
 	*/
   socket.on("join", ({ token, id: room }, callback) => {
 	// Adds the user to to room
+
+	if (rooms[room] == null) {
+		callback({
+			roomname: undefined,
+			owner: undefined,
+			type: undefined,
+			name: undefined
+		});
+		return
+	}
+
 	Users.findById(token, function (err, docs) {
 	  if (err){
 		  console.log("err");
@@ -134,7 +145,7 @@ io.on("connection", (socket) => {
   socket.on("send message", (name, room, message) => {
 	
 	if (message == null || message == '' || message == undefined) {
-		socket.emit("toast", "There was a error sending that message", 'error')
+		socket.emit("toast", "You can not send nothing!", 'error')
 		return
 	}
 

@@ -21,9 +21,7 @@ const Message = ({ message }: {message:any}) => {
 	message.message = emoji(message.message)
 	if (message.mention == false){
 		return (
-		<div> 
-
-			<br/>
+		<div style={{ marginTop: '10px' }}> 
 
 			<div style={{color: "white", backgroundColor: "", borderRadius: "10px", marginRight: "min", height: "content"}}>
 
@@ -40,9 +38,7 @@ const Message = ({ message }: {message:any}) => {
 		)
 	} else {
 		return (
-		<div>
-
-			<br/>
+		<div style={{ marginTop: '10px' }}>
 
 			<div style={{color: "white", backgroundColor: "#001eff", borderRadius: "10px", marginRight: "min", height: "content", minHeight: "30px", verticalAlign: "50%", flexWrap: 'wrap'}}>
 					
