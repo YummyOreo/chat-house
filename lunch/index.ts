@@ -67,6 +67,7 @@ io.on("connection", (socket) => {
 	// Adds the user to to room
 
 	if (rooms[room] == null) {
+		console.log("ERROR")
 		callback({
 			roomname: undefined,
 			owner: undefined,
@@ -92,7 +93,7 @@ io.on("connection", (socket) => {
 		// joins the room
 		socket.join(rooms[room]);
 		// Updates the user list on the left of the client
-		updateUserList({ socket, rooms, room, Users });
+		updateUserList({socket, rooms, room})
 		// Makes the id for the join message
 		let id = checkMessageId(room);
 		// Sends the message
@@ -204,6 +205,10 @@ io.on("connection", (socket) => {
 		Users.find({id: id})
 		.then((result) => {
 			console.log(result)
+			if (result.name == undefined){
+				socket.emit("toast", "There was a error kicking that user", 'error')
+				return
+			}
 			socket.emit("toast", `${result.name} has been kicked`, 'success')
 		})
 		.catch(err => socket.emit("toast", "There was a error kicking that user", 'error'))

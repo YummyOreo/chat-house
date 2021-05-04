@@ -4,13 +4,14 @@ socket: the socket of the user
 rooms: all the rooms
 room: the room id of the room -_-
 */
-let updateUserList = ({socket, rooms, room, Users}) => {
+const updateUserList = ({socket, rooms, room}) => {
 	// Makes a list
 	let userList = [];
 	// loops all the users and adds it to the list
 	for (let user in rooms[room].names){
+		console.log("TEST")
 		let userReturn = {name: rooms[room].names[user], id: rooms[room].id[socket.id]}
-		userList.push(rooms[room].names[user])
+		userList.push(userReturn)
 
 	}
 	// Emits the list
