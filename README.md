@@ -28,7 +28,7 @@ Chat House, is a app for creators. You can make different types of rooms for dif
 ## How to contribute:
 
 - First find something to work on
-- Next get it working on you pc ([How to run](#how-to-run-the-app)])
+- Next get it working on you pc ([How to run](#how-to-run-the-app))
 - Next fork the repo and work on your fixes/changes/additions
 - Now Read [How To Commit](HOW_TO_COMMIT.md)
   - Using `yarn` so have that installed
