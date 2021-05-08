@@ -19,3 +19,16 @@ typings/
 
 .env
 /.env
+
+# Server temp files / debug files
+# the stats of the server 
+.log
+/.log
+
+# Saves the vars if needed (Only on save mode)
+.save
+/.save
+
+# Logs the debug (Only on debug mode)
+.debug
+/.debug
