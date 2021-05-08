@@ -5,6 +5,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 node_modules/
 /node_modules
 jspm_packages/
+/yarn-error.log
+yarn-error.log/
 
 # TypeScript v1 declaration files
 typings/
