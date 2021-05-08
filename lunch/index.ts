@@ -10,6 +10,7 @@ let mongoose = require("mongoose")
 require('dotenv').config()
 
 let Users = require('./models/user')
+let RoomDB = require('./models/room')
 
 let url = process.env.URL
 let ID = process.env.ID
@@ -37,7 +38,7 @@ let io = socketio(server);
 app.use(router);
 //app.use(cors());
 
-mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 	.then(() => {
 		console.log("Connected to db")
 		//Setsupt the port
@@ -49,15 +50,16 @@ mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: t
 	})
 
 //Give the message a ID
-function checkMessageId(room) {
+function checkMessageId(messages) {
   //Gest the heighest number in the room
-  let max = Math.max(...rooms[room].messages);
+  let max = Math.max(...messages);
   max += 1; // adds one
   return max;
 }
 
 // When A user connects **not joins**
 io.on("connection", (socket) => {
+	let soketRoom;
   // When the user joins
   /*
 	name: the name of the user
@@ -65,76 +67,78 @@ io.on("connection", (socket) => {
 	*/
   socket.on("join", ({ token, id: room }, callback) => {
 	// Adds the user to to room
+	soketRoom = room;
+	RoomDB.findById(room)
+		.catch(() => console.log("error"))
+		.then((result) => {
+			console.log(result)
+			if (result.name === undefined) {
+				callback({
+					roomname: undefined,
+					owner: undefined,
+					type: undefined,
+					name: undefined
+				});
+				return;
+			}
+			Users.findById(token, function (err, docs) {
+				if (err){
+					console.log(err);
+				}
+				else{
+				  let name = docs.name
+				  addUser({ socketID: socket.id, userName: name, roomID: room, RoomDB, token, id: docs.id });
+				  /*
+				  console.log(rooms[room].name)
+			  
+				  console.log(rooms)
+				  */
+				  // joins the room
+				  socket.join(room);
+				  // Updates the user list on the left of the client
+				  updateUserList({socket, RoomDB, room})
+				  // Makes the id for the join message
+				  RoomDB.findById(room)
+					  .catch(err => console.log(err))
+					  .then(res => {
+						  let id = checkMessageId(res.messages);
+						  // Sends the message
+						  RoomDB.findByIdAndUpdate(room, {"messages": [...res.messages, id]})
+						  .catch(err => console.log(err))
+						  socket.emit("message", 
+							  "System",
+							  `@${name} has joined the room!`,
+							  id,
+						  );
+						  socket.to(room).emit("message", 
+							  "System",
+							  `@${name} has joined the room!`,
+							  id,
+						  );
+						  if (res.owner === token) {
+							  callback({
+								  roomname: res.name,
+								  owner: true,
+								  type: res.type,
+								  name
+							  });
+						  } else {
+							  callback({
+								  roomname: res.name,
+								  owner: false,
+								  type: res.type,
+								  name
+							  });
+						  }
+					  })
+		  
+				}
+			});
 
-	if (rooms[room] == null) {
-		console.log("ERROR")
-		callback({
-			roomname: undefined,
-			owner: undefined,
-			type: undefined,
-			name: undefined
-		});
-		return
-	}
+		})
 
-	Users.findById(token, function (err, docs) {
-	  if (err){
-		  console.log("err");
-		  console.log(err);
-	  }
-	  else{
-		let name = docs.name
-		rooms = addUser({ socketID: socket.id, userName: name, roomID: room, rooms, token, id: docs.id });
-		/*
-		console.log(rooms[room].name)
+
 	
-		console.log(rooms)
-		*/
-		// joins the room
-		socket.join(rooms[room]);
-		// Updates the user list on the left of the client
-		updateUserList({socket, rooms, room})
-		// Makes the id for the join message
-		let id = checkMessageId(room);
-		// Sends the message
-		rooms[room].messages.push(id);
-		socket.emit("message", 
-		  "System",
-		  `@${name} has joined the room!`,
-		  id,
-		);
-		socket.to(rooms[room]).emit("message", 
-		  "System",
-		  `@${name} has joined the room!`,
-		  id,
-		);
-		/*
-		let user: any;
-		let userList: any = [];
-		for (user in rooms[room].users){
-		  console.log(rooms[room].users)
-		  console.log(user)
-		  userList.push(rooms[room].users[user])
-		}
-		console.log(userList)
-		*/
-		if (rooms[room].owner === token) {
-		  callback({
-			roomname: rooms[room].name,
-			owner: true,
-			type: rooms[room].type,
-			name
-		  });
-		} else {
-		  callback({
-			roomname: rooms[room].name,
-			owner: false,
-			type: rooms[room].type,
-			name
-		  });
-		}
-	  }
-  });
 
   });
   //For sending a message (Every messasge even join and leave)
@@ -161,83 +165,125 @@ io.on("connection", (socket) => {
 		console.log(err)
 		socket.emit("toast", "There was a error sending that message", 'error')
 	}}
-	// Gets the ID of the message
-	let id = checkMessageId(room);
+	RoomDB.findById(room)
+			.catch(err => console.log(err))
+			.then(res => {
+			// Gets the ID of the message
+			let id = checkMessageId(res.messages);
 
-	// Emits the message to the room
-	rooms[room].messages.push(id);
-	console.log(name)
-	socket.emit("message", name, message, id );
-	socket.to(rooms[room]).emit("message", name, message, id );
-  });
+			// Emits the message to the room
+			RoomDB.findByIdAndUpdate(room, {"messages": [...res.messages, id]})
+				.catch(err => {console.log(err); 
+					socket.emit("toast", "There was a error sending that message", 'error') 
+					return
+				})
+				.then(res => {
+					socket.emit("message", name, message, id );
+					socket.to(room).emit("message", name, message, id );
+				})
+				
+		});
+	});
   // When a user disconnects
   /*
 	None
 	*/
   socket.on("disconnect", () => {
 	// Gets the room of the user
-	let room = getUsersRooms(socket, rooms);
-	// if there not in a room, do nothing
-	if (room == undefined) return;
-	// make a messgae
-	let id = checkMessageId(room);
-	//sends the message
-	rooms[room].messages.push(id);
-	socket.to(rooms[room]).emit("message", 
-	  "System",
-	  `@${rooms[room].names[socket.id]} has left.`,
-	  id,
-	);
+	
+	let room = soketRoom
+
+	socket.leave(room)
+
+	console.log(room)
+
+	if (room == home) return;
+
+	let token;
+
+	RoomDB.findById(room)
+		.catch(err => console.log('err'))
+		.then(res => {
+			for (let user in res.users) {
+				if (res.users[user].socket == socket.id) {
+					token = user
+					return;
+				}
+			}
+		})
+
 	// Removes the user
-	rooms = removeUser({
-	  socketID: socket.id,
-	  userName: rooms[room].users[socket.id],
-	  roomID: room,
-	  rooms,
-	});
+	rooms = removeUser({roomID: room, RoomDB, token: token });
 	// Updates the list
-	updateUserList({ socket, rooms, room, Users });
+	updateUserList({ socket, RoomDB, room: room, Users });
   });
 
   socket.on('kick', (id, token, room) => {
-	if (rooms[room].owner === token) {
-		socket.to(rooms[room]).emit('kicked', id)
-		Users.find({id: id})
-		.then((result) => {
-			console.log(result)
-			if (result.name == undefined){
-				socket.emit("toast", "There was a error kicking that user", 'error')
-				return
+	RoomDB.findById(room)
+		.catch(err => console.log(err))
+		.then(res => {
+			if (res.owner === token) {
+				socket.to(room).emit('kicked', id)
+				Users.find({id: id})
+				.then((result) => {
+					console.log(result)
+					if (result.name == undefined){
+						socket.emit("toast", "There was a error kicking that user", 'error')
+						return
+					}
+					socket.emit("toast", `${result.name} has been kicked`, 'success')
+				})
+				.catch(err => socket.emit("toast", "There was a error kicking that user", 'error'))
 			}
-			socket.emit("toast", `${result.name} has been kicked`, 'success')
 		})
-		.catch(err => socket.emit("toast", "There was a error kicking that user", 'error'))
-	}
+	
   })
 
   socket.on('join home', (callback) => {
+	soketRoom = home;
 	socket.join(home)
 	let returnRoom = {}
-	for (let id in rooms){
-	  console.log(id)
-	  returnRoom[id] = rooms[id].name
-	  console.log(returnRoom)
-	}
-	callback(returnRoom);
+	RoomDB.find()
+		.catch(err => console.log('err'))
+		.then(res => {
+			for (let id in res){
+				console.log(res[id])
+				returnRoom[res[id]._id] = res[id].name
+				console.log(returnRoom)
+			}
+			callback(returnRoom);
+		})
   })
   
   socket.on("new room", (name, type, token, callback) => {
 	let id: any
-	var roomID = randomToken(35);
-	rooms = makeRoom({ RoomName: name, rooms, type, roomID, token })
-	console.log(rooms)
+	
 	let returnRoom = {}
-	for (let room in rooms){
-	  returnRoom[room] = rooms[room].name
-	}
-	socket.to(home).emit("room update", returnRoom)
-	socket.emit("room update", returnRoom)
-	callback(roomID)
+	RoomDB.find()
+		.catch(err => console.log(err))
+		.then(res => {
+			console.log(res[0])
+			let Rooms = res[0]
+			let roomID = makeID(Rooms)
+			console.log(name)
+			rooms = makeRoom({ 
+				RoomName: name,
+				RoomDB,
+				type,
+				roomID,
+				token
+			})
+			returnRoom[roomID] = name
+			for (let id in res[0]){
+				console.log(id)
+				returnRoom[res[id]._id] = res[id].name
+				console.log(returnRoom)
+			}
+			socket.to(home).emit("room update", returnRoom)
+			socket.emit("room update", returnRoom)
+			callback(roomID)
+		})
+	
   })
 
 
@@ -288,17 +334,18 @@ io.on("connection", (socket) => {
 			
 		});
 
-		/**/
-
 	  });
   })
 
 });
 
-function getUsersRooms(socket, rooms) {
-  // Loops all the rooms and checks if the user is there
-  let room;
-  for (room in rooms) {
-	if (rooms[room].users[socket.id] != null) return room; // returns the room id
-  }
+function makeID(Rooms) {
+	let id = randomToken(35);
+	if (Rooms == undefined) return id
+	console.log(Rooms)
+	if (Rooms[id] != null){
+		id = makeID(Rooms)
+	} else {
+		return id
+	}
 }

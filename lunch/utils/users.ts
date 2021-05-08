@@ -10,22 +10,28 @@ userName: the name of the user
 roomID: the id of the room
 rooms: all the rooms
 */
-let addUser = ({ socketID, userName, roomID, rooms, token, id }) => {
-  // If the name is null, undefined, or '' it sets it to Guest
-  console.log(rooms)
-  console.log(roomID)
-  /*
-	userName = userName.trim()
-	roomID = roomID.trim()
-	*/
+let addUser = ({ socketID, userName, roomID, RoomDB, token, id }) => {
+	// If the name is null, undefined, or '' it sets it to Guest
+	console.log('W')
+	/*
+		userName = userName.trim()
+		roomID = roomID.trim()
+		*/
 
-  //rooms[id] = { name: { RoomName }, users: { socketID: userName }, names: { userName: socketID }, owner: owner };
-  // Adds to the user list
-  rooms[roomID].users[socketID] = token;
-  rooms[roomID].token[token] = socketID;
-  rooms[roomID].names[socketID] = userName;
-  rooms[roomID].id[socketID] = id;
-  return rooms;
+	//rooms[id] = { name: { RoomName }, users: { socketID: userName }, names: { userName: socketID }, owner: owner };
+	// Adds to the user list
+	RoomDB.findById(roomID)
+		.catch(() => console.log("error"))
+		.then((result) => {
+			delete result.users["null"]
+			let users = {...result.users, [token]: {name: userName, id: id, socket: socketID}}
+			RoomDB.findByIdAndUpdate(roomID, {"users": users})
+				.then(result => console.log(result))
+				.catch(() => console.log("error"))
+		})
+	return RoomDB
+
+
 };
 // removes a user for the room
 /*
@@ -34,18 +40,19 @@ userName: the name of the user
 roomID: the id of the room
 rooms: all the rooms
 */
-let removeUser = ({ socketID, userName, roomID, rooms, token }) => {
-  // deletes the user from the room
-  delete rooms[roomID].users[socketID];
-  delete rooms[roomID].token[token];
-  delete rooms[roomID].names[socketID];
-  delete rooms[roomID].id[socketID];
+let removeUser = ({roomID, RoomDB, token }) => {
+	// deletes the user from the room
+	RoomDB.findById(roomID)
+		.catch(() => console.log("error"))
+		.then((result) => {
+			let users = result.users
+			delete users.token
+			RoomDB.findByIdAndUpdate(roomID, {"users": users})
+				.then(result => console.log(result))
+				.catch(() => console.log("error"))
+		})
+	return RoomDB
 
-  // If its the owner delets the owner
-  if (token == rooms[roomID].owner) {
-    rooms[roomID].owner = "";
-  }
-  return rooms;
 };
 // Makes a room
 /*
@@ -59,23 +66,26 @@ rooms: all the rooms
 // Needs editing when making the home page
 let makeRoom = ({
   RoomName,
-  rooms,
+  RoomDB,
   type,
   roomID,
   token
 }) => {
-  // Makes it
-  rooms[roomID] = {
-    name: RoomName,
-    users: {},
-    token: {},
-    names: {},
-    id: {},
-    owner: token,
-    messages: [1],
-    type: type,
-  };
-  return rooms;
+
+	let room = new RoomDB({
+		_id: roomID,
+		name: RoomName,
+		users: {null: null},
+		owner: token,
+		messages: [1],
+		type: "chat"
+	});
+	room.save()
+	.then((result) => {
+		console.log(result)
+	})
+	return RoomDB
+
 };
 
 // exports all funcs
