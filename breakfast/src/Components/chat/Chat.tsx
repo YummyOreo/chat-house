@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import queryString from 'query-string';
 import io from 'socket.io-client';
+import { useToasts } from 'react-toast-notifications'
 
 import NavBar from './navBar/NavBar'
 import Input from './input/input'
@@ -20,20 +21,12 @@ var connectionOptions: any =  {
 
 const Chat = ({ location }: {location:any}) => {
 
-	function promptNameFunc(socket: any, room: any) {
-		console.log(socket)
-		let tryName = prompt('Whats your name');		
-		socket.emit('check name', tryName, room, (result: any) => {
-			if (result == true){
-				promptNameFunc(socket, room)
-			} else {
-				console.log(tryName)
-				return tryName
-			}
-		})
-		return tryName
-
+	if (localStorage.getItem('token') == null) {
+		window.location.href = '/login'
 	}
+
+	const { addToast } = useToasts()
+	const [token] = useState(localStorage.getItem('token'))
 
 	let [name, setName] = useState('');
 	let [room, setRoom] = useState('');
@@ -47,10 +40,7 @@ const Chat = ({ location }: {location:any}) => {
 
 	let [roomName, setRoomName] = useState('');
 
-	let [newName, setNewName] = useState('');
-
 	let [owner, setOwner] = useState(false);
-	let [ownerID, setOwnerID] = useState('');
 
 	let [type, setType] = useState('');
 
@@ -61,23 +51,18 @@ const Chat = ({ location }: {location:any}) => {
 
 		socket = io(ENDPOINT, connectionOptions);
 		setTimeout(() => { 
-			let promptName: string | null;
-			promptName = promptNameFunc(socket, id);
-			if (promptName == null) promptName = 'Guest'
-			console.log(promptName)
-
-			setName(promptName);
 
 			setRoom(id);
 			console.log(id + " " + room)
-			socket.emit('join', { name: promptName, id }, ({ roomname, ownerID, owner, type }: any) => {
+			socket.emit('join', { token, id }, ({ roomname, owner, type, name }: any) => {
+				if (roomname == null || roomname == undefined) window.location.href = '/error?code=101'
 				setRoomName(roomname);
+				setName(name)
 				setType(type)
 				console.log(users)
 				console.log(owner)
 				if (owner == true){
 					setOwner(true)
-					setOwnerID(ownerID)
 				}
 			});
 			console.log(roomName)
@@ -94,19 +79,32 @@ const Chat = ({ location }: {location:any}) => {
 	}, [ENDPOINT, location.search]);
 
 	useEffect(() => {
+		socket.on("toast", (content: any, type: any) => {
+			addToast(content, {
+				appearance: type,
+				autoDismiss: true,
+				PlacementType: "bottom-right"
+			})
+		})
+	}, [ addToast ])
+
+	useEffect(() => {
 		socket.on('kicked', (id: any) => {
 			console.log('Kicked')
-			console.log(socket.id)
-			//socket.emit("disconnect", room);
-			//socket.off();
-			window.location.href = '/'
+			console.log(localStorage.getItem('id'))
+			if (id == localStorage.getItem('id')){
+				socket.emit("disconnect", room);
+				socket.off();
+				window.location.href = '/home?code=100'
+			}
+			
 		})
 	})
 
 	useEffect(() => {
 		//all messages
-		socket.on('message', ({ nameSend, sendMessage, id }: {nameSend:any, sendMessage:any, id:any}) => {
-			//console.log(name)
+		socket.on('message', (nameSend: any, sendMessage: any, id: any ) => {
+			console.log(nameSend)
 			//messages[id] = {name, message: sendMessage};
 			let idValue = id
 			let mention = false
@@ -131,51 +129,44 @@ const Chat = ({ location }: {location:any}) => {
 		event.preventDefault();
 
 		if(message) {
-			socket.emit('send message', name, room, message, ownerID);
+			socket.emit('send message', name, room, message);
 		}
 
 	}
 
-	const changeName = () => {
-		console.log(socket)
-		let testName: any = prompt('Whats your name');	
-		if (testName == null || testName == ''){
-			changeName()
-		}
-
-		if (users.includes(testName) && testName != null){
-			changeName()
-		} else {
-			setNewName(testName)
-			changeNameEmit(testName)
-		}
+	const kick = (id: any) => {
+		socket.emit("kick", id, token, room)
 	}
 
 	return (
 		<div>
 		<div style={{"zIndex": 10}}>
-			<NavBar roomName={roomName} changeName={changeName}/>
+			<NavBar roomName={roomName}/>
 		</div>	
 				<br/>
 				<br/>
 				<div>
 				</div>
-			<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '#292929', height: 'max', minHeight: "95vh"}}>
+			<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '	#505050', minHeight: "93vh"}}>
 				<div className='container' style={{marginTop: 0}}>
-				<div>
+				<br></br>
+				<br></br>
+				<div style={{ backgroundColor: "#404040", borderRadius: "5%"}}>
 					<br/>
-					<div style={{width: "10px"}}>
+					<div style={{width: "10px", marginLeft: "1rem"}}>
 						<Messages messages={messages} />
 					</div>
 					<br/>
 					<br/>
+					<div style={{marginLeft: "1rem", marginRight: "1rem"}}>
 						<Input message={message} setMessage={setMessage} sendMessage={sendMessage} type={type} owner={owner}/>
+					</div>
 					<br/>
 				</div>
 
 				</div>
-				<div style={{backgroundColor: "gray", width: 'max', height: 'max', minHeight: "95vh", color: "white"}}>
-					<UserBar users={users}/>
+				<div style={{backgroundColor: "#606060", width: 'max', minHeight: "93vh", color: "white"}}>
+					<UserBar users={users} kick={kick} owner={owner}/>
 				</div>
 			</div>
 			

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client';
+import { useToasts } from 'react-toast-notifications'
+import queryString from 'query-string';
+import { Helmet } from 'react-helmet'
 
 import "../main.css";
 
@@ -17,11 +20,30 @@ var connectionOptions: any =  {
 let socket: any;
 
 const Home = ({ location }: any) => {
+	const { addToast } = useToasts()
+
+	if (localStorage.getItem('token') == null) {
+		window.location.href = 'login'
+	}
+
+	const [token] = useState(localStorage.getItem('token'))
+	
 	// {id: name}
 	const [rooms, setRooms] = useState({test: "test"});
 	const ENDPOINT = 'localhost:5000';
-
+	console.log()
 	useEffect(() => {
+
+		const { code }: any = queryString.parse(location.search);
+
+		if (code == "100") {
+			addToast("You have been kicked from the room!", {
+				appearance: "warning",
+				autoDismiss: true,
+				PlacementType: "bottom-right"
+			})
+		}
+
 		socket = io(ENDPOINT, connectionOptions);
 		socket.emit('join home', ( returnRoom: any) => {
 			setRooms(returnRoom)
@@ -35,20 +57,43 @@ const Home = ({ location }: any) => {
 		})
 	}, [rooms])
 
+	useEffect(() => {
+		socket.on("toast", (content: string, type: any) => {
+			addToast(content, {
+				appearance: type,
+				autoDismiss: true,
+				PlacementType: "bottom-right"
+			})
+		})
+	}, [ addToast ])
+
 	return (
 		<div>
+			<Helmet>
+				<title>Home | Chat House</title>
+				<meta name="Chat House" content="Chat House, is a app for creators. You can make different types of rooms for different purposes!" />
+			</Helmet>
 			<div>
-				<Navbar/>
+				<Navbar />
 			</div>
 			<div>
 				</div>
-					<div style={{ backgroundColor: "gray" }}>
-						<h1>
-						Rooms
-						</h1>
-					<div style={{ textAlign: 'center'}}>
-						<RoomList rooms={rooms}/>
-					</div>
+					<div style={{display: "grid", gridTemplateColumns: "11fr 3fr", gridGap: "0", backgroundColor: '	#505050', height: 'max', minHeight: "100vh"}}>
+						<div className='container' style={{marginTop: 0}}>
+
+							<div style={{ backgroundColor: "#404040", textAlign: 'center', borderRadius: "5%", marginTop: "80px", minHeight: "85vh"}}>
+								<p style={{ fontSize: "40px" }}>
+								Rooms
+								</p>
+								<div style={{ overflow: "scroll", width: "inherit", height: "inherit"}}>
+									<br/>
+									<RoomList rooms={rooms}/>
+								</div>
+							</div>
+						</div>
+							<div style={{backgroundColor: "#606060", width: 'max', height: 'max', minHeight: "95vh", color: "white"}}>
+								<p>test</p>
+							</div>
 			</div>
 		</div>
 	);

@@ -9,13 +9,14 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 				<form>
 					<input
 					style={{color: "white"}}
+					id='input'
 					type="text"
 					placeholder="Message"
 					onChange={(event) => setMessage(event.target.value)} 
 					onKeyPress={event => event.key === "Enter" ? sendMessage(event) : null}
 					/>
-					<button className="waves-effect waves-light btn" onClick={(event: any) => {
-						if (event == '') return;
+					<button className="waves-effect waves-light btn" style={{ backgroundColor: "#001eff", marginLeft: "45rem"}} onClick={(event: any) => {
+						if (event == '' || event == null) return;
 						sendMessage(event)
 						
 					}}>Send
@@ -46,7 +47,7 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 						/>
 						<button 
 						disabled={disabled}
-						className="waves-effect waves-light btn" onClick={(event: any) => {
+						className="waves-effect waves-light btn" style={{ backgroundColor: "#001eff", marginLeft: "45rem"}} onClick={(event: any) => {
 							if (event == '' || disabled == true) return;
 							sendMessage(event)
 							
@@ -66,7 +67,7 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 					onChange={(event) => setMessage(event.target.value)} 
 					onKeyPress={event => event.key === "Enter" ? sendMessage(event) : null}
 					/>
-					<button className="waves-effect waves-light btn" onClick={(event: any) => {
+					<button className="waves-effect waves-light btn" style={{ backgroundColor: "#001eff", marginLeft: "45rem"}} onClick={(event: any) => {
 						if (event == '') return;
 						sendMessage(event)
 						
