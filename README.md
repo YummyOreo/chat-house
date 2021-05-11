@@ -45,8 +45,7 @@ Title example:
 ### First download the files
 
 ```console
-$ git clone https://github.com/OreoDivision/chat-house
-$ cd chat-house
+$ git clone https://github.com/OreoDivision/chat-house && cd chat-house
 ```
 
 This will download the sorce for the chat app
