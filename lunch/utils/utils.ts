@@ -11,6 +11,9 @@ const updateUserList = ({socket, RoomDB, room}) => {
     .catch(() => console.log("error"))
     .then((result) => {
 		console.log(result)
+
+		delete result.users.null
+
 		for (let user in result.users){
 			userList.push({name: result.users[user].name, id: result.users[user].id})
 		}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import "../../main.css";
 
@@ -16,12 +16,20 @@ const Navbar = () => {
 		right: 0,
 		backgroundColor: "#606060"
 	}
+	const [roomName, setRoomName] = useState('');
 
 	return(
 		<div style={sticky}>
 			<nav style={stickyInner}>
 				<div className='nav-wrapper'>
-					<a href="/make" className="waves-effect waves-light btn" style={{marginLeft: "1rem", backgroundColor: "#001eff"}}>Make Room</a>
+					<a className="waves-effect waves-light btn" 
+						style={{marginLeft: "1rem", backgroundColor: "#001eff"}}
+						onClick={() => {
+							window.location.href = '/make'
+						}}
+					>
+						Make Room
+					</a>
 				</div>
 			</nav>
 			<hr

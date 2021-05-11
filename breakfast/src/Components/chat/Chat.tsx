@@ -55,7 +55,7 @@ const Chat = ({ location }: {location:any}) => {
 			setRoom(id);
 			console.log(id + " " + room)
 			socket.emit('join', { token, id }, ({ roomname, owner, type, name }: any) => {
-				if (roomname == null || roomname == undefined) window.location.href = '/error?code=101'
+				if (roomname == null || roomname == undefined) window.location.href = '/home?code=101'
 				setRoomName(roomname);
 				setName(name)
 				setType(type)
@@ -112,6 +112,9 @@ const Chat = ({ location }: {location:any}) => {
 			if (lowerCaseName.includes(`@${name.toLowerCase()}`)){ mention = true}
 			setMessages({...messages, [idValue]: {name: nameSend, message: sendMessage, mention}})
 			console.log(messages)
+			let element: HTMLElement | null = document.getElementById("box");
+			if (element === null) return;
+			element.scrollIntoView({behavior: "smooth"})
 		});
 	}, [messages]);
 
@@ -126,8 +129,10 @@ const Chat = ({ location }: {location:any}) => {
 	}
 
 	const sendMessage = (event: any) => {
+		if (message === [] || message === null || message === undefined) return
 		event.preventDefault();
-
+		setMessage([]);
+		event.target.value = ""
 		if(message) {
 			socket.emit('send message', name, room, message);
 		}

@@ -12,11 +12,17 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 					id='input'
 					type="text"
 					placeholder="Message"
-					onChange={(event) => setMessage(event.target.value)} 
-					onKeyPress={event => event.key === "Enter" ? sendMessage(event) : null}
+					onChange={(event) => {
+						setMessage(event.target.value)
+					}} 
+					onKeyPress={event => {if (event.key === "Enter"){
+						sendMessage(event)
+						} 
+					}}
 					/>
 					<button className="waves-effect waves-light btn" style={{ backgroundColor: "#001eff", marginLeft: "45rem"}} onClick={(event: any) => {
 						if (event == '' || event == null) return;
+						event.target.value = "";
 						sendMessage(event)
 						
 					}}>Send
