@@ -4,8 +4,6 @@
 
 ---
 
-# ⚠️  DO NOT WORK ON ANYTHING TILL THE PR [#17](https://github.com/OreoDivision/chat-house/pull/17) IS MERGED ⚠️ 
-
 ## Structure
 
 | Codebase               |                   Description                    |
