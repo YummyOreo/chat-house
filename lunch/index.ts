@@ -72,7 +72,7 @@ io.on("connection", (socket) => {
 		.catch(() => console.log("error"))
 		.then((result) => {
 			console.log(result)
-			if (result.name === undefined) {
+			if (result === undefined || result === null) {
 				callback({
 					roomname: undefined,
 					owner: undefined,
