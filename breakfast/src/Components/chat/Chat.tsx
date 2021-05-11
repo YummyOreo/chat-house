@@ -55,7 +55,7 @@ const Chat = ({ location }: {location:any}) => {
 			setRoom(id);
 			console.log(id + " " + room)
 			socket.emit('join', { token, id }, ({ roomname, owner, type, name }: any) => {
-				if (roomname == null || roomname == undefined) window.location.href = '/home?code=101'
+				if (roomname === null || roomname === undefined) window.location.href = '/home?code=101'
 				setRoomName(roomname);
 				setName(name)
 				setType(type)
