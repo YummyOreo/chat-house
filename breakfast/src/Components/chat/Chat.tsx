@@ -38,8 +38,6 @@ const Chat = ({ location }: {location:any}) => {
 
 	const [slowmode, setSlowmode] = useState(1)
 
-	let [systems] = useState([]);
-
 	let [roomName, setRoomName] = useState('');
 
 	let [owner, setOwner] = useState(false);
@@ -57,8 +55,10 @@ const Chat = ({ location }: {location:any}) => {
 			setRoom(id);
 			console.log(id + " " + room)
 			socket.emit('join', { token, id }, ({ roomname, owner, type, name, slowmode }: any) => {
-				if (roomname == null || roomname == undefined) window.location.href = '/home?code=101'
+				if (roomname === null || roomname === undefined) window.location.href = '/home?code=101'
+
 				setSlowmode(slowmode)
+
 				setRoomName(roomname);
 				setName(name)
 				setType(type)
@@ -79,7 +79,7 @@ const Chat = ({ location }: {location:any}) => {
 
 			socket.off();
 		}
-	}, [ENDPOINT, location.search]);
+	}, [ENDPOINT, location.search, owner, room, roomName, token, users]);
 
 	useEffect(() => {
 		socket.on("toast", (content: any, type: any) => {
