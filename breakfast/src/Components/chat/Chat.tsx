@@ -36,6 +36,8 @@ const Chat = ({ location }: {location:any}) => {
 	let [messages, setMessages] = useState({ 1: {name: "System", message: "This is the start of the chat", mention: true}});
 	let [message, setMessage] = useState([]);
 
+	const [slowmode, setSlowmode] = useState(1)
+
 	let [systems] = useState([]);
 
 	let [roomName, setRoomName] = useState('');
@@ -54,8 +56,9 @@ const Chat = ({ location }: {location:any}) => {
 
 			setRoom(id);
 			console.log(id + " " + room)
-			socket.emit('join', { token, id }, ({ roomname, owner, type, name }: any) => {
+			socket.emit('join', { token, id }, ({ roomname, owner, type, name, slowmode }: any) => {
 				if (roomname == null || roomname == undefined) window.location.href = '/home?code=101'
+				setSlowmode(slowmode)
 				setRoomName(roomname);
 				setName(name)
 				setType(type)
@@ -164,7 +167,7 @@ const Chat = ({ location }: {location:any}) => {
 					<br/>
 					<br/>
 					<div style={{marginLeft: "1rem", marginRight: "1rem"}}>
-						<Input message={message} setMessage={setMessage} sendMessage={sendMessage} type={type} owner={owner}/>
+						<Input slowmode={slowmode} message={message} setMessage={setMessage} sendMessage={sendMessage} type={type} owner={owner}/>
 					</div>
 					<br/>
 				</div>

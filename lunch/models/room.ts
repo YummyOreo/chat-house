@@ -25,6 +25,10 @@ let roomSchema = new Schema({
 	name: {
 		type: String,
 		required: true
+	},
+	slowmode: {
+		type: Number,
+		required: true
 	}
 });
 

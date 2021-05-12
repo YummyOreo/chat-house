@@ -2,7 +2,10 @@ import React from 'react';
 
 import "../../main.css";
 
-const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
+const Input = ({ message, setMessage, sendMessage, type, owner, slowmode }: any) => {
+	if (owner) {
+		slowmode = "You have no slowmode!!"
+	}
 	if (type === 'chat'){
 		return (
 			<div>
@@ -20,6 +23,7 @@ const Input = ({ message, setMessage, sendMessage, type, owner }: any) => {
 						} 
 					}}
 					/>
+					<label style={{ color: "gray"}}> {slowmode} </label>
 					<button className="waves-effect waves-light btn" style={{ backgroundColor: "#001eff", marginLeft: "45rem"}} onClick={(event: any) => {
 						if (event == '' || event == null) return;
 						event.target.value = "";

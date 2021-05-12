@@ -78,7 +78,8 @@ let makeRoom = ({
 		users: {null: null},
 		owner: token,
 		messages: [1],
-		type: "chat"
+		type: "chat",
+		slowmode: 1
 	});
 	room.save()
 	.then((result) => {

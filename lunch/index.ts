@@ -59,6 +59,7 @@ function checkMessageId(messages) {
 
 // When A user connects **not joins**
 io.on("connection", (socket) => {
+	let slowmode;
 	let soketRoom;
   // When the user joins
   /*
@@ -77,7 +78,8 @@ io.on("connection", (socket) => {
 					roomname: undefined,
 					owner: undefined,
 					type: undefined,
-					name: undefined
+					name: undefined,
+					slowmode: undefined
 				});
 				return;
 			}
@@ -115,6 +117,7 @@ io.on("connection", (socket) => {
 							  `@${name} has joined the room!`,
 							  id,
 						  );
+						  slowmode = res.slowmode;
 						  if (res.owner === token) {
 							  callback({
 								  roomname: res.name,
@@ -127,7 +130,8 @@ io.on("connection", (socket) => {
 								  roomname: res.name,
 								  owner: false,
 								  type: res.type,
-								  name
+								  name,
+								  slowmode: res.slowmode
 							  });
 						  }
 					  })
@@ -168,6 +172,12 @@ io.on("connection", (socket) => {
 	RoomDB.findById(room)
 			.catch(err => console.log(err))
 			.then(res => {
+
+			if (slowmode != 0){
+				socket.emit("toast", "There was a error sending that message", 'error')
+				return;
+			}
+
 			// Gets the ID of the message
 			let id = checkMessageId(res.messages);
 
@@ -180,6 +190,10 @@ io.on("connection", (socket) => {
 				.then(res => {
 					socket.emit("message", name, message, id );
 					socket.to(room).emit("message", name, message, id );
+
+					slowmode = 0
+					setTimeout(() => {  slowmode = res.slowmode; }, res.slowmode * 100);
+
 				})
 				
 		});
