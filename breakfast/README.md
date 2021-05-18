@@ -11,7 +11,8 @@
 ## How to Run
 
 ### Make Oauth App
-** You dont have to do this ijf you did it in the server side app**
+> **You dont have to do this if you did it in the server side app**
+
 First you need to make a github Oauth app [See here](https://docs.github.com/en/developers/apps/authorizing-oauth-apps)
 
 These fields should be filled out like this:
