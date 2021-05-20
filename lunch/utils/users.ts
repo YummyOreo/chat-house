@@ -1,69 +1,69 @@
 
-// How a room looks
-// rooms = { id: {name: '', users: {}, names: {}, owner: '', messages: [], ownerID: /*int*/, type: "" }
-// Types: Announcements, chat, qna, discord, more
-
-// Add a user to a room
 /*
-UserID: the socket id of the user
-userName: the name of the user
-roomID: the id of the room
-rooms: all the rooms
+	Add user to room
+	----
+	socketID: the socket id
+	userName: the name of the user
+	roomID: the id of the room
+	RoomDB: the db
+	token: the user token
+	id: the id of the user
 */
 let addUser = ({ socketID, userName, roomID, RoomDB, token, id }) => {
-	// If the name is null, undefined, or '' it sets it to Guest
-	console.log('W')
-	/*
-		userName = userName.trim()
-		roomID = roomID.trim()
-		*/
 
-	//rooms[id] = { name: { RoomName }, users: { socketID: userName }, names: { userName: socketID }, owner: owner };
-	// Adds to the user list
+	// Finds the room
 	RoomDB.findById(roomID)
-		.catch(() => console.log("error"))
+		.catch((err) => console.log(err))
 		.then((result) => {
+
+			// Delets the filler iser
 			delete result.users["null"]
+
+			// Makes a new var and adds it to it
 			let users = {...result.users, [token]: {name: userName, id: id, socket: socketID}}
+
+			// Updates the new room 
 			RoomDB.findByIdAndUpdate(roomID, {"users": users})
-				.then(result => console.log(result))
-				.catch(() => console.log("error"))
+				.catch((err) => console.log(err))
 		})
-	return RoomDB
-
-
 };
-// removes a user for the room
+
 /*
-userID: the id of the user
-userName: the name of the user
-roomID: the id of the room
-rooms: all the rooms
+	Removes a user from a room
+	----
+	roomID: the id of the room
+	RoomDB: the db
+	token: the token of the user
 */
 let removeUser = ({roomID, RoomDB, token }) => {
-	// deletes the user from the room
+	
+	// Finds the room
 	RoomDB.findById(roomID)
 		.catch(() => console.log("error"))
 		.then((result) => {
+
+			// sets the var
 			let users = result.users
+			
+			// Deletes the user
 			delete users.token
+
+			// Updates the room
 			RoomDB.findByIdAndUpdate(roomID, {"users": users})
 				.then(result => console.log(result))
 				.catch(() => console.log("error"))
 		})
-	return RoomDB
-
 };
-// Makes a room
+
 /*
-roomsID: the id of the room (WIll change to making it here mby)
-roomName: the name of the room
-userName: the name of the ownser
-owner: the iwner
-userID: the id of the user
-rooms: all the rooms
+	Make Room
+	----
+	RoomName: The name of the room
+	RoomDB: The db
+	type: The type of the room
+	roomID: the id of the room
+	token: the user token
 */
-// Needs editing when making the home page
 let makeRoom = ({
   RoomName,
   RoomDB,
@@ -72,6 +72,7 @@ let makeRoom = ({
   token
 }) => {
 
+	// Makes a new docs
 	let room = new RoomDB({
 		_id: roomID,
 		name: RoomName,
@@ -81,12 +82,9 @@ let makeRoom = ({
 		type: "chat",
 		slowmode: 1
 	});
-	room.save()
-	.then((result) => {
-		console.log(result)
-	})
-	return RoomDB
 
+	// Saves the db
+	room.save()
 };
 
 // exports all funcs

@@ -1,10 +1,13 @@
 import React from 'react';
-import io from 'socket.io-client';
 
-import "../../main.css";
-
+/*
+	nav bar
+	----
+	roomName: the name of the room
+*/
 const NavBar = ({roomName}: any) => {
 
+	// Css to make the navbar sticky and colored
 	const sticky: any = {
 		position: "fixed",
 		height: "3rem",
@@ -21,11 +24,16 @@ const NavBar = ({roomName}: any) => {
 	return(
 		<div style={sticky}>
 			<nav style={stickyInner}>
+
 				<div className='nav-wrapper'>
+
 					<a href="/" className="waves-effect waves-light btn" style={{marginLeft: "1rem", backgroundColor: "#001eff"}}>Back</a>
 					<a className="brand-logo center">{roomName}</a>
+
 				</div>
+			
 			</nav>
+
 			<hr
        		 style={{
 				color: "gray",
@@ -33,6 +41,7 @@ const NavBar = ({roomName}: any) => {
 				height: 2
 			}}
 			/>
+			
 		</div>
 	)
 }

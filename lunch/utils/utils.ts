@@ -1,28 +1,34 @@
-// Updates the user list
 /*
-socket: the socket of the user
-rooms: all the rooms
-room: the room id of the room -_-
+	Update user list
+	----
+	socket: the socket var
+	roomDB: the db
+	room: the room id
 */
 const updateUserList = ({socket, RoomDB, room}) => {
+	
 	// Makes a list
 	let userList = [];
+	
+	// Finds the room
 	RoomDB.findById(room)
-    .catch(() => console.log("error"))
-    .then((result) => {
-		console.log(result)
+    	.catch(() => console.log("error"))
+    	.then((result) => {
 
-		delete result.users.null
+			// Deletes the filler
+			delete result.users.null
 
-		for (let user in result.users){
-			userList.push({name: result.users[user].name, id: result.users[user].id})
-		}
-		// loops all the users and adds it to the list
-		// Emits the list
-		console.log(userList)
-		socket.emit('user list', userList)
-		socket.to(room).emit('user list', userList)
-	})
+			// Loops though all the users
+			for (let user in result.users){
+
+				// Adds them to the list
+				userList.push({name: result.users[user].name, id: result.users[user].id})
+			}
+			
+			// Emits then to the list
+			socket.emit('user list', userList)
+			socket.to(room).emit('user list', userList)
+		})
 	
 }
 

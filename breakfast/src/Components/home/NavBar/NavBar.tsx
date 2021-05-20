@@ -20,8 +20,11 @@ const Navbar = () => {
 
 	return(
 		<div style={sticky}>
+
 			<nav style={stickyInner}>
+
 				<div className='nav-wrapper'>
+
 					<a className="waves-effect waves-light btn" 
 						style={{marginLeft: "1rem", backgroundColor: "#001eff"}}
 						onClick={() => {
@@ -30,8 +33,11 @@ const Navbar = () => {
 					>
 						Make Room
 					</a>
+
 				</div>
+
 			</nav>
+
 			<hr
        		 style={{
 				color: "darkgray",
@@ -39,6 +45,7 @@ const Navbar = () => {
 				height: 2
 			}}
 			/>
+			
 		</div>
 	)
 }

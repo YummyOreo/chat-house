@@ -1,24 +1,31 @@
 import React from 'react';
-import "../../../main.css";
 
+// Changing to emojis
 function emoji(message: any){
-	message = message.replace('\:', ":")
-	message = message.replace('\;', ";")
-	message = message.replace('\|', "|")
 	message = message.replace(':)', "🙂")
+
 	message = message.replace(';)', "😉")
+	
 	message = message.replace(':o', "😮")
 	message = message.replace(':0', "😮")
+	
 	message = message.replace(':|', "😐")
+	
 	message = message.replace(':p', "😛")
 	message = message.replace(':P', "😛")
+	
 	message = message.replace(';p', "😜")
 	message = message.replace(';P', "😜")
+
 	return message
 }
 
 const Message = ({ message }: {message:any}) => {
+
+	// changes to emojis where it can
 	message.message = emoji(message.message)
+
+	// if it is not a mention
 	if (message.mention == false){
 		return (
 		<div style={{ marginTop: '10px' }}> 
@@ -36,6 +43,7 @@ const Message = ({ message }: {message:any}) => {
 			</div>
 		</div>
 		)
+	// if it is a mention
 	} else {
 		return (
 		<div style={{ marginTop: '10px' }}>

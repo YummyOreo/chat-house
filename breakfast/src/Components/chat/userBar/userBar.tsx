@@ -2,8 +2,13 @@ import React from 'react';
 
 import User from "./user/User"
 
-import "../../main.css";
-
+/*
+	user bar
+	----
+	users: all users
+	kick: to kick someone
+	owner: if you are the owner
+*/
 const UserBar = ({users, kick, owner}: any) => {
 
 	return(
