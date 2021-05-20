@@ -4,8 +4,6 @@
 
 ---
 
-> Most comments in the files are out of date, updating them soon
-
 ## Structure
 
 | Codebase               |                   Description                    |
